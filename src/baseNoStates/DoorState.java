@@ -4,16 +4,15 @@ public abstract class DoorState {
   protected Door door;
   protected String name;
 
-  public DoorState (Door door){
-    door = this.door;
+  public DoorState(Door door, String n) {
+    this.door = door;
+    this.name = n;
   }
-  public boolean open() {
-    return true;
-  }
-  public boolean close() {
-    return true;
-  }
-  public boolean lock() { return true; }
-  public boolean unlock() { return true; }
+
+  public abstract void open();
+  public abstract void close();
+  public abstract void unlock();
+  public abstract void lock();
+
 
 }
