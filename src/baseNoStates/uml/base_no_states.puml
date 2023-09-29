@@ -56,6 +56,28 @@ class Door {
 - doAction(action : String)
 }
 
+abstract class DoorState extends Door {
+- door: Door
+- name: String
++ DoorState(door: Door)
++ open()
++ lock()
++ unlock()
+}
+
+class Unlocked extends DoorState{
++ DoorState(door: Door)
++ open()
++ lock()
++ unlock()
+}
+
+class Locked extends DoorState{
++ DoorState(door: Door)
++ open()
++ lock()
++ unlock()
+}
 
 class User {
 - name : String
