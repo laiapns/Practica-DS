@@ -60,6 +60,7 @@ abstract class DoorState extends Door {
 - door: Door
 - name: String
 + DoorState(door: Door)
++ close()
 + open()
 + lock()
 + unlock()
@@ -67,6 +68,7 @@ abstract class DoorState extends Door {
 
 class Unlocked extends DoorState{
 + DoorState(door: Door)
++ close()
 + open()
 + lock()
 + unlock()
@@ -74,6 +76,21 @@ class Unlocked extends DoorState{
 
 class Locked extends DoorState{
 + DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
+}
+class Opened extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
+}
+class Closed extends DoorState{
++ DoorState(door: Door)
++ close()
 + open()
 + lock()
 + unlock()

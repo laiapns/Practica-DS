@@ -8,9 +8,11 @@ public class Door {
   private final String id;
   private boolean closed; // physically
   private boolean locked;
+  private DoorState state;
 
   public Door(String id) {
     this.id = id;
+    this.state = new Closed(this,id);
     closed = true;
     locked = false;
   }
@@ -24,7 +26,8 @@ public class Door {
     } else {
       System.out.println("not authorized");
     }
-    request.setDoorStateName(getStateName());
+    String stateName = getStateName().toString();
+    request.setDoorStateName(stateName);
   }
 
   private void doAction(String action) {
@@ -44,10 +47,18 @@ public class Door {
         }
         break;
       case Actions.LOCK:
-        // TODO
+        if(closed){
+          locked = true;
+        } else {
+          System.out.println("Door " + id + " can't be locked because is open.");
+        }
         // fall through
       case Actions.UNLOCK:
-        // TODO
+        if(locked){
+          locked = false;
+        } else {
+          System.out.println("Door " + id + " already unlocked.");
+        }
         // fall through
       case Actions.UNLOCK_SHORTLY:
         // TODO
@@ -59,12 +70,14 @@ public class Door {
     }
   }
 
+
+  public void setState(DoorState door){
+    this.state=door;
+    System.out.println("Door " + id + " is now in state: " + this.getStateName());
+  }
+
   public boolean isClosed() {
     return closed;
-  }
-  public boolean isLocked() { return locked; }
-  public void setState(){
-
   }
 
 
@@ -72,8 +85,8 @@ public class Door {
     return id;
   }
 
-  public String getStateName() {
-    return "unlocked";
+  public DoorState getStateName() {
+    return state;
   }
 
   @Override

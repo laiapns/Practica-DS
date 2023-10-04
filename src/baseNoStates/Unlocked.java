@@ -10,7 +10,12 @@ public class Unlocked extends DoorState {
   @Override
   public void close() {}
   @Override
-  public void unlock() {}
+  public void unlock() {
+    System.out.println("Door " + name + " already unlocked");
+  }
   @Override
-  public void lock() {}
+  public void lock() {
+    System.out.println("Locking the door: " + name );
+    door.setState(new Locked(door, name));
+  }
 }
