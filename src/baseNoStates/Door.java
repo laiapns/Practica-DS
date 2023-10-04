@@ -26,8 +26,7 @@ public class Door {
     } else {
       System.out.println("not authorized");
     }
-    String stateName = getStateName().toString();
-    request.setDoorStateName(stateName);
+    request.setDoorStateName(getStateName());
   }
 
   private void doAction(String action) {
@@ -70,10 +69,21 @@ public class Door {
     }
   }
 
-
+  //ADAPTAR
   public void setState(DoorState door){
-    this.state=door;
-    System.out.println("Door " + id + " is now in state: " + this.getStateName());
+    if (door != null) {
+      if (door instanceof UnlockedShortly) {
+        //iniciar temporitzador per entrar en l'estat  unlockshortly
+
+      } else if (door instanceof UnlockedShortly) {
+        //netejar temporitzador al sortir de l'estat unlockshortly
+      }
+
+      state = door;
+      System.out.println("Door " + id + " is now in state: " + this.getStateName());
+    } else {
+      System.out.println("Invalid state provided.");
+    }
   }
 
   public boolean isClosed() {
@@ -85,8 +95,8 @@ public class Door {
     return id;
   }
 
-  public DoorState getStateName() {
-    return state;
+  public String getStateName() {
+    return state.toString();
   }
 
   @Override

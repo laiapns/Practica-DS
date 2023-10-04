@@ -23,4 +23,8 @@ public class Closed extends DoorState{
     System.out.println("Locking the door: " + name );
     door.setState(new Locked(door, name));
   }
+  public void unlockshortly(){
+    System.out.println("Unocking shortly the door: " + name );
+    door.setState(new UnlockedShortly(door, name));
+  }
 }

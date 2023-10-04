@@ -64,6 +64,7 @@ abstract class DoorState extends Door {
 + open()
 + lock()
 + unlock()
++ unlockshortly()
 }
 
 class Unlocked extends DoorState{
@@ -72,14 +73,23 @@ class Unlocked extends DoorState{
 + open()
 + lock()
 + unlock()
++ unlockshortly()
 }
-
+class UnlockedShortly extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
+}
 class Locked extends DoorState{
 + DoorState(door: Door)
 + close()
 + open()
 + lock()
 + unlock()
++ unlockshortly()
 }
 class Opened extends DoorState{
 + DoorState(door: Door)
@@ -87,6 +97,7 @@ class Opened extends DoorState{
 + open()
 + lock()
 + unlock()
++ unlockshortly()
 }
 class Closed extends DoorState{
 + DoorState(door: Door)
@@ -94,6 +105,15 @@ class Closed extends DoorState{
 + open()
 + lock()
 + unlock()
++ unlockshortly()
+}
+class Propped extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
 }
 
 class User {
