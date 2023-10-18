@@ -75,13 +75,29 @@ public class Door {
         System.exit(-1);
     }
   }
+  public boolean canI(User user) {
+    /*switch (user.accessPermission){
+      case "employees":
+        if((!id.equals("D1") || !id.equals("D2"))){
+        return true;
+      }
+        break;
+      case "manager":
+        break;
+      case "admin":
+        break;
+      default:
+        return true;
+        break;
+    }*/
+    return true;
+  }
 
-  //ADAPTAR
-  public void setState(DoorState door){
+  public void setState(DoorState doorState){
     Timer timer=new Timer();
+    if (doorState != null) {
 
-    if (door != null) {
-      if (door instanceof UnlockedShortly) {
+      if (doorState instanceof UnlockedShortly) {
         timer.schedule(new TimerTask() {
           @Override
           public void run() {
@@ -96,7 +112,7 @@ public class Door {
           }
         },1000);
       }
-      state = door;
+      state = doorState;
       System.out.println("Door " + id + " is now in state: " + this.getStateName());
     } else {
       System.out.println("Invalid state provided.");
