@@ -23,8 +23,13 @@ public class Closed extends DoorState{
     System.out.println("Locking the door: " + name );
     door.setState(new Locked(door, name));
   }
+  @Override
   public void unlockshortly(){
     System.out.println("Unocking shortly the door: " + name );
     door.setState(new UnlockedShortly(door, name));
+  }
+  @Override
+  public void propper(){
+    System.out.println("Door " + name + " can't be propper");
   }
 }

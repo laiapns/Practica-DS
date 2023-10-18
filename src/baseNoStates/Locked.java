@@ -26,5 +26,8 @@ public class Locked extends DoorState{
     System.out.println("Unlocking shortly the door: " + name );
     door.setState(new UnlockedShortly(door, name));
   }
+  public void propper(){
+    System.out.println("Door " + name + " can't be propper");
+  }
 }
 

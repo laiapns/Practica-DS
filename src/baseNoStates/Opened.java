@@ -25,4 +25,8 @@ public class Opened extends DoorState{
   public void unlockshortly(){
     System.out.println("Door " + name + " already unlocked");
   }
+  @Override
+  public void propper(){
+    System.out.println("Door " + name + " can't be propper");
+  }
 }

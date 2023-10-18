@@ -15,14 +15,17 @@ public class Propped extends DoorState{
   }
   @Override
   public void unlock() {
-    System.out.println("Door " + name + " can't be unlocked while it's proppped");
+    System.out.println("Door " + name + " can't be unlocked while it's propped");
   }
   @Override
   public void lock() {
-    System.out.println("Door " + name + " can't be locked while it's proppped");
+    System.out.println("Door " + name + " can't be locked while it's propped");
   }
   @Override
   public void unlockshortly(){
-    System.out.println("Door " + name + " can't be unlocked while it's proppped");
+    System.out.println("Door " + name + " can't be unlocked while it's propped");
+  }
+  public void propper(){
+    System.out.println("Door " + name + " already propped");
   }
 }

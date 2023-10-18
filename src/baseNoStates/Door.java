@@ -2,6 +2,8 @@ package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Door {
@@ -9,12 +11,14 @@ public class Door {
   private boolean closed; // physically
   private boolean locked;
   private DoorState state;
+  private Door d;
 
   public Door(String id) {
     this.id = id;
     this.state = new Closed(this,id);
     closed = true;
     locked = false;
+    d=this;
   }
 
   public void processRequest(RequestReader request) {
@@ -60,8 +64,11 @@ public class Door {
         }
         // fall through
       case Actions.UNLOCK_SHORTLY:
-        // TODO
-        System.out.println("Action " + action + " not implemented yet");
+        if(locked){
+          locked = false;
+        } else {
+          System.out.println("Door " + id + " already unlocked.");
+        }
         break;
       default:
         assert false : "Unknown action " + action;
@@ -71,14 +78,24 @@ public class Door {
 
   //ADAPTAR
   public void setState(DoorState door){
+    Timer timer=new Timer();
+
     if (door != null) {
       if (door instanceof UnlockedShortly) {
-        //iniciar temporitzador per entrar en l'estat  unlockshortly
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            if (isClosed()){
+              doAction("lock");
+            }
+            else {
+              setState(new Propped(d,id));
+            }
+            timer.cancel();
 
-      } else if (door instanceof UnlockedShortly) {
-        //netejar temporitzador al sortir de l'estat unlockshortly
+          }
+        },1000);
       }
-
       state = door;
       System.out.println("Door " + id + " is now in state: " + this.getStateName());
     } else {

@@ -31,4 +31,6 @@ public class UnlockedShortly extends DoorState{
   public void unlockshortly(){
     System.out.println("Door " + name + " is already unlocked shortly");
   }
+  @Override
+  public void propper(){door.setState(new Propped(door, name));}
 }
