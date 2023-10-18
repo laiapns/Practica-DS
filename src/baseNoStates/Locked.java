@@ -15,7 +15,7 @@ public class Locked extends DoorState{
   @Override
   public void unlock() {
     System.out.println("Unlocking the door: " + name );
-    door.setState(new Unlocked(door, name));
+    door.setState(new Unlocked(door, name),requestReader);
   }
   @Override
   public void lock() {
@@ -24,7 +24,7 @@ public class Locked extends DoorState{
   @Override
   public void unlockshortly(){
     System.out.println("Unlocking shortly the door: " + name );
-    door.setState(new UnlockedShortly(door, name));
+    door.setState(new UnlockedShortly(door, name),requestReader);
   }
   public void propper(){
     System.out.println("Door " + name + " can't be propper");

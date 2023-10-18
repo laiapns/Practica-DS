@@ -12,6 +12,7 @@ public class Door {
   private boolean locked;
   private DoorState state;
   private Door d;
+  private RequestReader requestReader;
 
   public Door(String id) {
     this.id = id;
@@ -75,49 +76,34 @@ public class Door {
         System.exit(-1);
     }
   }
-  public boolean canI(User user) {
-    /*switch (user.accessPermission){
-      case "employees":
-        if((!id.equals("D1") || !id.equals("D2"))){
-        return true;
-      }
-        break;
-      case "manager":
-        break;
-      case "admin":
-        break;
-      default:
-        return true;
-        break;
-    }*/
-    return true;
-  }
 
-  public void setState(DoorState doorState){
-    Timer timer=new Timer();
+  public void setState(DoorState doorState, RequestReader request) {
     if (doorState != null) {
-
-      if (doorState instanceof UnlockedShortly) {
-        timer.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            if (isClosed()){
-              doAction("lock");
+      if (request.isAuthorized()) {
+        if (doorState instanceof UnlockedShortly) {
+          Timer timer = new Timer();
+          timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+              if (isClosed()) {
+                doAction(Actions.LOCK); // Lock the door
+              } else {
+                setState(new Propped(d, id), request); // Set to another state
+              }
+              timer.cancel();
             }
-            else {
-              setState(new Propped(d,id));
-            }
-            timer.cancel();
-
-          }
-        },1000);
+          }, 1000);
+        }
+        state = doorState;
+        System.out.println("Door " + id + " is now in state: " + this.getStateName());
+      } else {
+        System.out.println("Not authorized to change the state of door " + id);
       }
-      state = doorState;
-      System.out.println("Door " + id + " is now in state: " + this.getStateName());
     } else {
       System.out.println("Invalid state provided.");
     }
   }
+
 
   public boolean isClosed() {
     return closed;

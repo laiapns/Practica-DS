@@ -1,9 +1,13 @@
 package baseNoStates;
 
+import baseNoStates.requests.RequestReader;
+import baseNoStates.requests.RequestRefresh;
+
 import java.util.ArrayList;
 
 public final class DirectoryUsers {
   private static final ArrayList<User> users = new ArrayList<>();
+  RequestReader requestReader;
 
   public static void makeUsers() {
     //TODO: make user groups according to the specifications in the comments, because

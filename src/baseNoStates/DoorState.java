@@ -1,8 +1,11 @@
 package baseNoStates;
 
+import baseNoStates.requests.RequestReader;
+
 public abstract class DoorState {
   protected Door door;
   protected String name;
+  RequestReader requestReader;
 
   public DoorState(Door door, String n) {
     this.door = door;

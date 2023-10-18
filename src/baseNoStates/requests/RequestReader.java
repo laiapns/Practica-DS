@@ -4,8 +4,12 @@ import baseNoStates.DirectoryDoors;
 import baseNoStates.DirectoryUsers;
 import baseNoStates.Door;
 import baseNoStates.User;
+
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +25,7 @@ public class RequestReader implements Request {
   private String doorStateName;
   private boolean doorClosed;
 
-  public RequestReader(String credential, String action, LocalDateTime now, String doorId) {
+  public RequestReader(String credential,String action,LocalDateTime now,String doorId) {
     this.credential = credential;
     this.action = action;
     this.doorId = doorId;
@@ -52,25 +56,25 @@ public class RequestReader implements Request {
       userName = "unknown";
     }
     return "Request{"
-            + "credential=" + credential
-            + ", userName=" + userName
-            + ", action=" + action
-            + ", now=" + now
-            + ", doorID=" + doorId
-            + ", closed=" + doorClosed
-            + ", authorized=" + authorized
-            + ", reasons=" + reasons
-            + "}";
+        + "credential=" + credential
+        + ", userName=" + userName
+        + ", action=" + action
+        + ", now=" + now
+        + ", doorID=" + doorId
+        + ", closed=" + doorClosed
+        + ", authorized=" + authorized
+        + ", reasons=" + reasons
+        + "}";
   }
 
   public JSONObject answerToJson() {
     JSONObject json = new JSONObject();
-    json.put("authorized", authorized);
-    json.put("action", action);
-    json.put("doorId", doorId);
-    json.put("closed", doorClosed);
-    json.put("state", doorStateName);
-    json.put("reasons", new JSONArray(reasons));
+    json.put("authorized",authorized);
+    json.put("action",action);
+    json.put("doorId",doorId);
+    json.put("closed",doorClosed);
+    json.put("state",doorStateName);
+    json.put("reasons",new JSONArray(reasons));
     return json;
   }
 
@@ -79,8 +83,8 @@ public class RequestReader implements Request {
   public void process() {
     User user = DirectoryUsers.findUserByCredential(credential);
     Door door = DirectoryDoors.findDoorById(doorId);
-    assert door != null : "door " + doorId + " not found";
-    authorize(user, door);
+    assert door != null:"door " + doorId + " not found";
+    authorize(user,door);
     // this sets the boolean authorize attribute of the request
     door.processRequest(this);
     // even if not authorized we process the request, so that if desired we could log all
@@ -90,14 +94,48 @@ public class RequestReader implements Request {
 
   // the result is put into the request object plus, if not authorized, why not,
   // only for testing
-  private void authorize(User user, Door door) {
+  public void authorize(User user,Door door) {
     if (user == null) {
       authorized = false;
       addReason("user doesn't exists");
     } else {
-      //TODO: get the who, where, when and what in order to decide, and if not
-      // authorized add the reason(s)
-      authorized = true;
+      String userRole = user.getUserRole();
+      LocalTime currentTime = now.toLocalTime();
+      LocalDateTime dt1 = LocalDateTime.now();
+
+      switch (userRole) {
+        case "employees":
+          LocalDateTime employeesStart = LocalDateTime.of(2023, 9, 1, 8, 00);
+          LocalDateTime employeesFinish = LocalDateTime.of(2024, 3, 1, 8, 00);
+          LocalTime employeesStartHour = LocalTime.of(9, 0);
+          LocalTime employeesFinishHour = LocalTime.of(17, 0);
+          if (now.isAfter(employeesStart) && now.isBefore(employeesFinish)
+              && currentTime.isAfter(employeesStartHour) && currentTime.isBefore(employeesFinishHour)
+              && now.getDayOfWeek() != DayOfWeek.SUNDAY && now.getDayOfWeek() != DayOfWeek.SATURDAY) {
+            authorized = true;
+
+          }
+          break;
+        case "manager":
+          LocalDateTime managerStart = LocalDateTime.of(2023, 9, 1, 8, 00);
+          LocalDateTime managerFinish = LocalDateTime.of(2024, 3, 1, 8, 00);
+          LocalTime managerStartHour = LocalTime.of(8, 0);
+          LocalTime managerFinishHour = LocalTime.of(20, 0);
+          if (now.isAfter(managerStart) && now.isBefore(managerFinish)
+              && currentTime.isAfter(managerStartHour) && currentTime.isBefore(managerFinishHour)
+              && now.getDayOfWeek() != DayOfWeek.SUNDAY ) {
+            authorized = true;
+
+          }
+
+          break;
+        case "admin":
+          authorized = true;
+          break;
+        default:
+          authorized = false;
+          break;
+      }
     }
   }
 }

@@ -11,7 +11,7 @@ public class Propped extends DoorState{
   @Override
   public void close() {
     System.out.println("Locking the door: " + name );
-    door.setState(new Locked(door,name));
+    door.setState(new Locked(door,name),requestReader);
   }
   @Override
   public void unlock() {
