@@ -13,10 +13,15 @@ public abstract class DoorState {
   }
 
   public abstract void open();
+
   public abstract void close();
+
   public abstract void unlock();
+
   public abstract void lock();
+
   public abstract void unlockshortly();
+
   public abstract void propper();
 
 

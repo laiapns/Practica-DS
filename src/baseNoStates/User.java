@@ -10,6 +10,7 @@ public class User {
     this.credential = credential;
     this.userRole = "";
   }
+
   public User(String name, String credential, String role) {
     this.name = name;
     this.credential = credential;

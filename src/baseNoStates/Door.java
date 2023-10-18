@@ -11,15 +11,15 @@ public class Door {
   private boolean closed; // physically
   private boolean locked;
   private DoorState state;
-  private Door d;
+  private Door door;
   private RequestReader requestReader;
 
   public Door(String id) {
     this.id = id;
-    this.state = new Closed(this,id);
+    this.state = new Closed(this, id);
     closed = true;
     locked = false;
-    d=this;
+    door = this;
   }
 
   public void processRequest(RequestReader request) {
@@ -51,21 +51,21 @@ public class Door {
         }
         break;
       case Actions.LOCK:
-        if(closed){
+        if (closed) {
           locked = true;
         } else {
           System.out.println("Door " + id + " can't be locked because is open.");
         }
         // fall through
       case Actions.UNLOCK:
-        if(locked){
+        if (locked) {
           locked = false;
         } else {
           System.out.println("Door " + id + " already unlocked.");
         }
         // fall through
       case Actions.UNLOCK_SHORTLY:
-        if(locked){
+        if (locked) {
           locked = false;
         } else {
           System.out.println("Door " + id + " already unlocked.");
@@ -88,7 +88,7 @@ public class Door {
               if (isClosed()) {
                 doAction(Actions.LOCK); // Lock the door
               } else {
-                setState(new Propped(d, id), request); // Set to another state
+                setState(new Propped(door, id), request); // Set to another state
               }
               timer.cancel();
             }

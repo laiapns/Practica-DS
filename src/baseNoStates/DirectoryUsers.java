@@ -17,8 +17,8 @@ public final class DirectoryUsers {
     // this is to withdraw all permissions but still to keep user data to give back
     // permissions later
 
-    users.add(new User("Bernat", "12345","permissionsLater"));
-    users.add(new User("Blai", "77532","permissionsLater"));
+    users.add(new User("Bernat", "12345", "permissionsLater"));
+    users.add(new User("Blai", "77532", "permissionsLater"));
 
     // employees :
     // Sep. 1 2023 to Mar. 1 2024
@@ -26,8 +26,8 @@ public final class DirectoryUsers {
     // just shortly unlock
     // ground floor, floor1, exterior, stairs (this, for all), that is, everywhere but the parking
 
-    users.add(new User("Ernest", "74984","employees"));
-    users.add(new User("Eulalia", "43295","employees"));
+    users.add(new User("Ernest", "74984", "employees"));
+    users.add(new User("Eulalia", "43295", "employees"));
 
     // managers :
     // Sep. 1 2023 to Mar. 1 2024
@@ -35,8 +35,8 @@ public final class DirectoryUsers {
     // all actions
     // all spaces
 
-    users.add(new User("Manel", "95783","manager"));
-    users.add(new User("Marta", "05827","manager"));
+    users.add(new User("Manel", "95783", "manager"));
+    users.add(new User("Marta", "05827", "manager"));
 
     // admin :
     // always=2023 to 2100

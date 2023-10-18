@@ -7,29 +7,34 @@ public class Unlocked extends DoorState {
 
   @Override
   public void open() {
-    System.out.println("Opening the door: " + name );
-    door.setState(new Opened(door, name),requestReader);
+    System.out.println("Opening the door: " + name);
+    door.setState(new Opened(door, name), requestReader);
   }
+
   @Override
   public void close() {
-    System.out.println("Closing the door: " + name );
-    door.setState(new Closed(door, name),requestReader);
+    System.out.println("Closing the door: " + name);
+    door.setState(new Closed(door, name), requestReader);
   }
+
   @Override
   public void unlock() {
     System.out.println("Door " + name + " already unlocked");
   }
+
   @Override
   public void lock() {
-    System.out.println("Locking the door: " + name );
-    door.setState(new Locked(door, name),requestReader);
+    System.out.println("Locking the door: " + name);
+    door.setState(new Locked(door, name), requestReader);
   }
+
   @Override
-  public void unlockshortly(){
+  public void unlockshortly() {
     System.out.println("Door " + name + " already unlocked");
   }
+
   @Override
-  public void propper(){
+  public void propper() {
     System.out.println("Door " + name + " can't be propper");
   }
 }
