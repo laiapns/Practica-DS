@@ -77,9 +77,8 @@ public class Door {
     }
   }
 
-  public void setState(DoorState doorState, RequestReader request) {
+  public void setState(DoorState doorState) {
     if (doorState != null) {
-      if (request.isAuthorized()) {
         if (doorState instanceof UnlockedShortly) {
           Timer timer = new Timer();
           timer.schedule(new TimerTask() {
@@ -88,7 +87,7 @@ public class Door {
               if (isClosed()) {
                 doAction(Actions.LOCK); // Lock the door
               } else {
-                setState(new Propped(door, id), request); // Set to another state
+                setState(new Propped(door, id)); // Set to another state
               }
               timer.cancel();
             }
@@ -99,9 +98,6 @@ public class Door {
       } else {
         System.out.println("Not authorized to change the state of door " + id);
       }
-    } else {
-      System.out.println("Invalid state provided.");
-    }
   }
 
 
