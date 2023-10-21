@@ -13,10 +13,13 @@ public class Door {
   private DoorState state;
   private Door door;
   private RequestReader requestReader;
+  private Space spaceFrom;
+  private Space spaceTo;
 
-  public Door(String id) {
+  public Door(String id, Space spaceFrom, Space spaceTo) {
     this.id = id;
     this.state = new Closed(this, id);
+
     closed = true;
     locked = false;
     door = this;

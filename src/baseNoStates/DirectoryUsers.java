@@ -56,5 +56,6 @@ public final class DirectoryUsers {
     System.out.println("user with credential " + credential + " not found");
     return null; // otherwise we get a Java error
   }
+  //makeusergroups()
 
 }
