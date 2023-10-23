@@ -16,7 +16,7 @@ public class Door {
   private Space spaceFrom;
   private Space spaceTo;
 
-  public Door(String id, Space spaceFrom, Space spaceTo) {
+  public Door(String id) {
     this.id = id;
     this.state = new Closed(this, id);
     closed = true;
@@ -46,8 +46,10 @@ public class Door {
         break;
       case Actions.LOCK:
         state.lock();
+        break;
       case Actions.UNLOCK:
         state.unlock();
+        break;
       case Actions.UNLOCK_SHORTLY:
         state.unlockshortly();
         break;
@@ -60,6 +62,7 @@ public class Door {
   public void setState(DoorState state, boolean isClosed) {
     if (state != null) {
         this.state = state;
+        closed=isClosed;
         System.out.println("Door " + id + " is now in state: " + this.getStateName());
       } else {
         System.out.println("Not authorized to change the state of door " + id);

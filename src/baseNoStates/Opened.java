@@ -2,9 +2,10 @@ package baseNoStates;
 
 public class Opened extends DoorState {
   public Opened(Door door, String name) {
-    super(door, name);
-  }
 
+    super(door, name);
+
+  }
   @Override
   public void open() {
     System.out.println("Door " + name + " already open");
@@ -13,12 +14,12 @@ public class Opened extends DoorState {
   @Override
   public void close() {
     System.out.println("Closing the door: " + name);
-    door.setState(this.door,new Closed(this.door,this.name));
+    door.setState(new Closed(this.door,this.name), true);
   }
 
   @Override
   public void unlock() {
-    System.out.println("Door " + name + " already unlocked");
+    door.setState(new Unlocked(this.door,this.name),false);
   }
 
   @Override

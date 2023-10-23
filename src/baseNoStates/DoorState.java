@@ -2,7 +2,7 @@ package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
 
-public abstract class DoorState extends States {
+public abstract class DoorState {
   protected Door door;
   protected String name;
 

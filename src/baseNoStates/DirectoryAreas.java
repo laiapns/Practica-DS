@@ -20,11 +20,5 @@ public class DirectoryAreas {
 
   }
 
-  public static findAreaById (String areaId) {
-    while (true) {
-      if  (areaId.equals(p.getId())) {
-      }
-    }
-    }
-  }
+  //public static findAreaById (String areaId) {}
 }

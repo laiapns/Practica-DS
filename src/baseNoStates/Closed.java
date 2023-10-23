@@ -8,7 +8,7 @@ public class Closed extends DoorState {
   @Override
   public void open() {
     System.out.println("Opening the door: " + name);
-    door.setState(new Opened(door, name));
+    door.setState(new Opened(door, name), false);
   }
 
   @Override
@@ -18,20 +18,18 @@ public class Closed extends DoorState {
 
   @Override
   public void unlock() {
-    System.out.println("Unlocking the door: " + name);
-    door.setState(new Unlocked(door, name));
+    door.setState(new Unlocked(door, name), true);
   }
 
   @Override
   public void lock() {
     System.out.println("Locking the door: " + name);
-    door.setState(new Locked(door, name));
+    door.setState(new Locked(door, name), true);
   }
 
   @Override
   public void unlockshortly() {
-    System.out.println("Unocking shortly the door: " + name);
-    door.setState(new UnlockedShortly(door, name));
+    System.out.println("Door " + name + " is not locked");
   }
 
   @Override

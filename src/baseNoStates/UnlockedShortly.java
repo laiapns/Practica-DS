@@ -13,14 +13,14 @@ public class UnlockedShortly extends DoorState {
   public void open() {
     if (System.currentTimeMillis() - startTime >= 10000) {
       System.out.println("Door : " + name + " may be propped");
-      door.setState(new Propped(door, name));
+      door.setState(new Propped(door, name), false);
     }
   }
 
   @Override
   public void close() {
     System.out.println("Locking the door: " + name);
-    door.setState(new Locked(door, name));
+    door.setState(new Locked(door, name), true);
   }
 
   @Override
@@ -40,6 +40,6 @@ public class UnlockedShortly extends DoorState {
 
   @Override
   public void propper() {
-    door.setState(new Propped(door, name));
+    door.setState(new Propped(door, name),false);
   }
 }

@@ -21,7 +21,7 @@ public class Locked extends DoorState {
   @Override
   public void unlock() {
     System.out.println("Unlocking the door: " + name);
-    door.setState(new Unlocked(this.door,this.name), false);
+    door.setState(new Unlocked(this.door,this.name), true);
   }
 
   @Override
