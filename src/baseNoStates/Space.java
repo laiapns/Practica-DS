@@ -14,6 +14,11 @@ public class Space extends Area {
   public String getId(){
     return id;
   }
+  @Override
+  public ArrayList<Space> getSpaces() {
+    ArrayList<Space> spaces = new ArrayList<>();
+    spaces.add(this);
+    return spaces;
+  }
 
-  //adddoorgivingacces(), seran les portes que entran al space
 }
