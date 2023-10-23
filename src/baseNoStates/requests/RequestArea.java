@@ -1,12 +1,12 @@
 package baseNoStates.requests;
 
 import baseNoStates.Actions;
+import baseNoStates.Area;
 import baseNoStates.DirectoryAreas;
 import baseNoStates.Door;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.awt.geom.Area;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -69,8 +69,8 @@ public class RequestArea implements Request {
   public void process() {
     // make the door requests and put them into the area request to be authorized later and
     // processed later
-    /*
-    Area area = DirectoryAreas.findAreaById(areaId);
+    Area area;
+    area = DirectoryAreas.findAreaById(areaId);
     // an Area is a Space or a Partition
     if (area != null) {
       // is null when from the app we click on an action but no place is selected because
@@ -86,6 +86,6 @@ public class RequestArea implements Request {
         requests.add(requestReader);
       }
     }
-     */
+
   }
 }

@@ -50,10 +50,22 @@ public class DirectoryAreas {
     for (Area area : allAreas) {
       if (area instanceof Space) {
         Space space = (Space) area;
-        doors.addAll(space.getDoors());
+        doors.addAll(space.getDoorsGivingAccess());
       }
     }
     return doors;
+  }
+  public static Door findDoorById(String doorId) {
+    ArrayList<Door> allDoors = getAllDoors();
+
+    for (Door door : allDoors) {
+      if (door.getId().equals(doorId)) {
+        return door;
+      }
+    }
+
+    System.out.println("Door with id " + doorId + " not found");
+    return null;
   }
 
 }

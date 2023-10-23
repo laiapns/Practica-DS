@@ -19,4 +19,5 @@ public abstract class Area {
   }
 
   public abstract ArrayList<Door> getDoorsGivingAccess();
+  //implementar també getSpaces() i findAreaById()
 }
