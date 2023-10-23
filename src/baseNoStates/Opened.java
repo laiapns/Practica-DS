@@ -13,7 +13,7 @@ public class Opened extends DoorState {
   @Override
   public void close() {
     System.out.println("Closing the door: " + name);
-    door.setState(new Closed(door, name));
+    door.setState(this.door,new Closed(this.door,this.name));
   }
 
   @Override

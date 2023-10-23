@@ -19,10 +19,8 @@ public class Door {
   public Door(String id, Space spaceFrom, Space spaceTo) {
     this.id = id;
     this.state = new Closed(this, id);
-
     closed = true;
-    locked = false;
-    door = this;
+    this.door = door;
   }
 
   public void processRequest(RequestReader request) {
@@ -39,40 +37,19 @@ public class Door {
 
   private void doAction(String action) {
     switch (action) {
+      //en cada accion entramos en States --> accion deseada
       case Actions.OPEN:
-        if (closed) {
-          closed = false;
-        } else {
-          System.out.println("Can't open door " + id + " because it's already open");
-        }
+        state.open();
         break;
       case Actions.CLOSE:
-        if (closed) {
-          System.out.println("Can't close door " + id + " because it's already closed");
-        } else {
-          closed = true;
-        }
+        state.close();
         break;
       case Actions.LOCK:
-        if (closed) {
-          locked = true;
-        } else {
-          System.out.println("Door " + id + " can't be locked because is open.");
-        }
-        // fall through
+        state.lock();
       case Actions.UNLOCK:
-        if (locked) {
-          locked = false;
-        } else {
-          System.out.println("Door " + id + " already unlocked.");
-        }
-        // fall through
+        state.unlock();
       case Actions.UNLOCK_SHORTLY:
-        if (locked) {
-          locked = false;
-        } else {
-          System.out.println("Door " + id + " already unlocked.");
-        }
+        state.unlockshortly();
         break;
       default:
         assert false : "Unknown action " + action;
@@ -80,23 +57,9 @@ public class Door {
     }
   }
 
-  public void setState(DoorState doorState) {
-    if (doorState != null) {
-        if (doorState instanceof UnlockedShortly) {
-          Timer timer = new Timer();
-          timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-              if (isClosed()) {
-                doAction(Actions.LOCK); // Lock the door
-              } else {
-                setState(new Propped(door, id)); // Set to another state
-              }
-              timer.cancel();
-            }
-          }, 1000);
-        }
-        state = doorState;
+  public void setState(DoorState state, boolean isClosed) {
+    if (state != null) {
+        this.state = state;
         System.out.println("Door " + id + " is now in state: " + this.getStateName());
       } else {
         System.out.println("Not authorized to change the state of door " + id);
