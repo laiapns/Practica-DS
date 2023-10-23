@@ -8,7 +8,6 @@ public class Space extends Area {
   private ArrayList doorsGivingAccess = new ArrayList<Door>();
   public Space (String id, String description, Partition parentPartition) {
     super(id,description, parentPartition);
-
   }
 
   public String getId(){

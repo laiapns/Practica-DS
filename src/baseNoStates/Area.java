@@ -14,4 +14,9 @@ public abstract class Area {
     }
   }
   public abstract ArrayList<Space> getSpaces();
+  public String getId() {
+    return id;
+  }
+
+  public abstract ArrayList<Door> getDoorsGivingAccess();
 }

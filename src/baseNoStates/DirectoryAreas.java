@@ -1,11 +1,12 @@
 package baseNoStates;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DirectoryAreas {
   private static Area restArea;
   private static ArrayList<Door> allDoors;
-  private static Partition p;
+  private static ArrayList<Area> allAreas;
 
   public static void makeAreas() {
     Partition building = new Partition("building","two floors and parking",null);
@@ -27,8 +28,32 @@ public class DirectoryAreas {
     Space corridor = new Space("corridor","corridor",floor1);
     Space IT = new Space("IT","IT",floor1);
 
+    allAreas=new ArrayList<>(Arrays.asList(building, basement, floor1, ground_floor, exterior, stairs, parking, hall, room1, room2, room3, corridor, IT));
 
   }
 
-  //public static findAreaById (String areaId) {}
+  public static Area findAreaById (String areaId) {
+    for (Area area : allAreas) {
+      if (area.getId().equals(areaId)) {
+        return area;
+      }
+    }
+    System.out.println("door with id " + areaId + " not found");
+    return null;
+  }
+  public static ArrayList<Area> getAllAreas() {
+    System.out.println(allAreas);
+    return allAreas;
+  }
+  public static ArrayList<Door> getAllDoors() {
+    ArrayList<Door> doors = new ArrayList<>();
+    for (Area area : allAreas) {
+      if (area instanceof Space) {
+        Space space = (Space) area;
+        doors.addAll(space.getDoors());
+      }
+    }
+    return doors;
+  }
+
 }

@@ -16,11 +16,14 @@ public class Door {
   private Space spaceFrom;
   private Space spaceTo;
 
-  public Door(String id) {
+  public Door(String id, Space from, Space to) {
     this.id = id;
     this.state = new Closed(this, id);
     closed = true;
     this.door = door;
+    spaceFrom = from;
+    spaceTo = to;
+
   }
 
   public void processRequest(RequestReader request) {
