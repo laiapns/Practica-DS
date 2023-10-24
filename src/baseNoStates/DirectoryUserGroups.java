@@ -1,15 +1,14 @@
 package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
-import baseNoStates.requests.RequestRefresh;
 
 import java.util.ArrayList;
 
-public final class DirectoryUsers {
+public final class DirectoryUserGroups {
   private static final ArrayList<User> users = new ArrayList<>();
   RequestReader requestReader;
 
-  public static void makeUsers() {
+  public static void makeUserGroups() {
     //TODO: make user groups according to the specifications in the comments, because
     // now all are the same
 
@@ -56,6 +55,6 @@ public final class DirectoryUsers {
     System.out.println("user with credential " + credential + " not found");
     return null; // otherwise we get a Java error
   }
-  //makeusergroups()
+
 
 }

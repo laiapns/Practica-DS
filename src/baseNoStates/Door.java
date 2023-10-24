@@ -40,7 +40,6 @@ public class Door {
 
   private void doAction(String action) {
     switch (action) {
-      //en cada accion entramos en States --> accion deseada
       case Actions.OPEN:
         state.open();
         break;

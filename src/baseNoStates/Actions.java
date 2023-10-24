@@ -1,5 +1,8 @@
 package baseNoStates;
 
+import java.util.Arrays;
+import java.util.List;
+
 public final class Actions {
   // possible actions in reader and area requests
   public static final String LOCK = "lock";
@@ -8,4 +11,9 @@ public final class Actions {
   // possible actions in door requests
   public static final String OPEN = "open";
   public static final String CLOSE = "close";
+
+  public static final List<String> EMPLOYEES_ACTIONS = Arrays.asList(
+      UNLOCK_SHORTLY);
+  public static final List<String> OTHERS_ACTIONS = Arrays.asList(
+      LOCK, UNLOCK, UNLOCK_SHORTLY, OPEN, CLOSE );
 }
