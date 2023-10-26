@@ -20,12 +20,10 @@ public class Door {
     this.id = id;
     this.state = new Closed(this, id);
     closed = true;
-    this.door = door;
     spaceFrom = from;
     spaceTo = to;
-
+    spaceTo.setDoorsGivingAccess(this);
   }
-
   public void processRequest(RequestReader request) {
     // it is the Door that process the request because the door has and knows
     // its state, and if closed or open
@@ -37,7 +35,6 @@ public class Door {
     }
     request.setDoorStateName(getStateName());
   }
-
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
