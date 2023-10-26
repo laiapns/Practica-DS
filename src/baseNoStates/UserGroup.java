@@ -13,6 +13,8 @@ public class UserGroup {
   public static final String MANAGERS_GROUP = "managers";
   public static final String ADMIN_GROUP = "admin";
 
+
+
   public static class GroupCharacteristics {
     private String groupName;
 
@@ -24,7 +26,10 @@ public class UserGroup {
 
     private List<String> allowedActions;
     private ArrayList<Area> accessibleSpaces;
+
     private List<User> users = new ArrayList<>();
+
+
     public GroupCharacteristics(String groupName,LocalDate userStart,LocalDate userFinish,
                                 LocalTime userStartHour,LocalTime userFinishHour,List<String> allowedActions,
                                 ArrayList<Area> accessibleSpaces) {
@@ -37,6 +42,9 @@ public class UserGroup {
       this.accessibleSpaces = accessibleSpaces;
 
     }
+    public ArrayList<Area> getAccessibleSpaces() {
+      return accessibleSpaces;
+    }
     public void addUser(User user) {
       users.add(user);
     }
@@ -44,6 +52,7 @@ public class UserGroup {
     public List<User> getUsers() {
       return users;
     }
+
 
   }
 
@@ -67,6 +76,7 @@ public class UserGroup {
             Actions.EMPLOYEES_ACTIONS,
             accessibleAreasEmployees
     );
+
   }
   public static final GroupCharacteristics MANAGERS_CHARACTERISTICS;
 

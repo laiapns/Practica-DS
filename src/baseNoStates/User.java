@@ -1,26 +1,19 @@
 package baseNoStates;
 
 import java.util.ArrayList;
+import baseNoStates.UserGroup;
 
 public class User {
   private final String name;
   private final String credential;
   private final String userRole;
 
-  private ArrayList<Space> accessibleSpaces;
+  private ArrayList<Area> accessibleSpaces;
 
   public User(String name, String credential) {
     this.name = name;
     this.credential = credential;
     this.userRole = "";
-    this.accessibleSpaces=new ArrayList<>();
-
-  }
-
-  public User(String name, String credential, String role) {
-    this.name = name;
-    this.credential = credential;
-    this.userRole = role;
     this.accessibleSpaces=new ArrayList<>();
   }
 
@@ -28,19 +21,15 @@ public class User {
     return credential;
   }
 
-  public String getUserRole() {
-    return userRole;
-  }
-
-  private ArrayList<Space> getSpaces(){
+  private ArrayList<Area> getSpaces(){
     return accessibleSpaces;
   }
-  public void addSpace(Space space){
-    accessibleSpaces.add(space);
+  public void addSpace(UserGroup.GroupCharacteristics group){
+    accessibleSpaces=group.getAccessibleSpaces();
   }
-  public boolean canBeInSpace(Space space){
-    for(Space s: accessibleSpaces){
-      if(s==space){
+  public boolean canBeInSpace(UserGroup.GroupCharacteristics group,Area area){
+    for(Area a: group.getAccessibleSpaces()){
+      if(a==area){
         return true;
       }
     }

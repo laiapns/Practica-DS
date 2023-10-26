@@ -38,8 +38,7 @@ public class DirectoryAreas {
   //Hacerlo así tan hardcoded?¿ Hacerlo como arriba que llame al root.getAllAreas y que en el areas te las devuelva +
   // hacer ArrayList de areas creadas y que cada vez que se cree una la añada.
   public static ArrayList<Area> getAllAreas() {
-    System.out.println(allAreas);
-    return allAreas;
+    return Area.getAllAreas();
   }
   public static ArrayList<Door> getAllDoors() {
     ArrayList<Door> doors = new ArrayList<>();

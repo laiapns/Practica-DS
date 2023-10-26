@@ -25,6 +25,12 @@ public final class DirectoryUserGroups {
     users.add(new User("Bernat", "12345"));
     users.add(new User("Blai", "77532"));
 
+    // employees :
+    // Sep. 1 2023 to Mar. 1 2024
+    // week days 9-17h
+    // just shortly unlock
+    // ground_floor, floor1, exterior, stairs (this, for all), that is, everywhere but the parking
+
     User ernestUser = new User("Ernest", "74984");
     User eulaliaUser = new User("Eulalia", "43295");
     UserGroup.EMPLOYEES_CHARACTERISTICS.addUser(ernestUser);
@@ -34,12 +40,6 @@ public final class DirectoryUserGroups {
     users.add(eulaliaUser);
 
     userGroups.add(UserGroup.EMPLOYEES_CHARACTERISTICS);
-
-    // employees :
-    // Sep. 1 2023 to Mar. 1 2024
-    // week days 9-17h
-    // just shortly unlock
-    // ground floor, floor1, exterior, stairs (this, for all), that is, everywhere but the parking
 
 
     // managers :
