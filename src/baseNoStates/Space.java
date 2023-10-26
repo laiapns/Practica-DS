@@ -5,7 +5,7 @@
 
   public class Space extends Area {
     private Partition parentPartition;
-    private ArrayList doorsGivingAccess = new ArrayList<Door>();
+    private final ArrayList<Door> doorsGivingAccess = new ArrayList<>();
     public Space (String id, String description, Partition parentPartition) {
       super(id,description, parentPartition);
     }

@@ -23,7 +23,6 @@ public class Door {
     this.door = door;
     spaceFrom = from;
     spaceTo = to;
-    spaceTo.setDoorsGivingAccess(this);
 
   }
 
