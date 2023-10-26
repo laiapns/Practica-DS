@@ -29,18 +29,14 @@ public class DirectoryAreas {
     Space IT = new Space("IT","IT",floor1);
 
     allAreas=new ArrayList<>(Arrays.asList(building, basement, floor1, ground_floor, exterior, stairs, parking, hall, room1, room2, room3, corridor, IT));
-
+    restArea = building;
   }
 
   public static Area findAreaById (String areaId) {
-    for (Area area : allAreas) {
-      if (area.getId().equals(areaId)) {
-        return area;
-      }
-    }
-    System.out.println("door with id " + areaId + " not found");
-    return null;
+    return restArea.findAreaById(areaId);
   }
+  //Hacerlo así tan hardcoded?¿ Hacerlo como arriba que llame al root.getAllAreas y que en el areas te las devuelva +
+  // hacer ArrayList de areas creadas y que cada vez que se cree una la añada.
   public static ArrayList<Area> getAllAreas() {
     System.out.println(allAreas);
     return allAreas;

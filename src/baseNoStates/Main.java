@@ -5,9 +5,9 @@ package baseNoStates;
 
 public class Main {
   public static void main(String[] args) {
-    DirectoryDoors.makeDoors();
-    DirectoryUsers.makeUsers();
     DirectoryAreas.makeAreas();
+    DirectoryUserGroups.makeUserGroups();
+    DirectoryDoors.makeDoors();
     new WebServer();
   }
 }
