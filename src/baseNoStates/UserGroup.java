@@ -24,7 +24,7 @@ public class UserGroup {
 
     private List<String> allowedActions;
     private ArrayList<Area> accessibleSpaces;
-
+    private List<User> users = new ArrayList<>();
     public GroupCharacteristics(String groupName,LocalDate userStart,LocalDate userFinish,
                                 LocalTime userStartHour,LocalTime userFinishHour,List<String> allowedActions,
                                 ArrayList<Area> accessibleSpaces) {
@@ -35,21 +35,18 @@ public class UserGroup {
       this.finishHour = userFinishHour;
       this.allowedActions = allowedActions;
       this.accessibleSpaces = accessibleSpaces;
-      GroupCharacteristics EMPLOYEES_CHARACTERISTICS;
+
     }
+    public void addUser(User user) {
+      users.add(user);
+    }
+
+    public List<User> getUsers() {
+      return users;
+    }
+
   }
 
-
-  /*public static final GroupCharacteristics EMPLOYEES_CHARACTERISTICS = new GroupCharacteristics(
-      EMPLOYEES_GROUP,
-      LocalDate.of(2023, 9, 1), // Sep. 1, 2023
-      LocalDate.of(2024, 3, 1), // Mar. 1, 2024
-      LocalTime.of(9, 0), // 9:00 AM
-      LocalTime.of(17, 0), // 5:00 PM
-      Actions.EMPLOYEES_ACTIONS,
-      new ArrayList<>(List.of(DirectoryAreas.findAreaById("room1")))
-
-  );*/
   public static final GroupCharacteristics EMPLOYEES_CHARACTERISTICS;
 
   static {
@@ -71,14 +68,31 @@ public class UserGroup {
             accessibleAreasEmployees
     );
   }
+  public static final GroupCharacteristics MANAGERS_CHARACTERISTICS;
 
-  /*public static final GroupCharacteristics MANAGERS_CHARACTERISTICS = new GroupCharacteristics(
-      MANAGERS_GROUP,
+  static {
+    MANAGERS_CHARACTERISTICS = new GroupCharacteristics(
+        MANAGERS_GROUP,
+        LocalDate.of(2023, 9, 1), // Sep. 1, 2023
+        LocalDate.of(2024, 3, 1), // Mar. 1, 2024
+        LocalTime.of(8, 0), // 9:00 AM
+        LocalTime.of(20, 0), // 5:00 PM
+        Actions.OTHERS_ACTIONS,
+        DirectoryAreas.getAllAreas()
+    );
+  }
+  public static final GroupCharacteristics ADMIN_CHARACTERISTICS;
 
-  );
+  static {
+    ADMIN_CHARACTERISTICS = new GroupCharacteristics(
+        ADMIN_GROUP,
+        LocalDate.of(2023, 9, 1), // Sep. 1, 2023
+        LocalDate.of(2024, 3, 1), // Mar. 1, 2024
+        LocalTime.of(00, 0), // 9:00 AM
+        LocalTime.of(00, 0), // 5:00 PM
+        Actions.OTHERS_ACTIONS,
+        DirectoryAreas.getAllAreas()
+    );
+  }
 
-  public static final GroupCharacteristics ADMIN_CHARACTERISTICS = new GroupCharacteristics(
-      ADMIN_GROUP,
-
-  );*/
 }
