@@ -6,17 +6,22 @@ import baseNoStates.UserGroup;
 public class User {
   private final String name;
   private final String credential;
-  private final String userRole;
+
+  private final UserGroup group;
+
 
   private ArrayList<Area> accessibleSpaces;
 
-  public User(String name, String credential) {
+  public User(String name, String credential, UserGroup group) {
     this.name = name;
     this.credential = credential;
-    this.userRole = "";
     this.accessibleSpaces=new ArrayList<>();
-  }
+    this.group = group;
 
+  }
+  public UserGroup getGroup() {
+    return group;
+  }
   public String getCredential() {
     return credential;
   }
@@ -24,10 +29,10 @@ public class User {
   private ArrayList<Area> getSpaces(){
     return accessibleSpaces;
   }
-  public void addSpace(UserGroup.GroupCharacteristics group){
-    accessibleSpaces=group.getAccessibleSpaces();
+  public void addSpace(UserGroup group){
+    accessibleSpaces = group.getAccessibleSpaces();
   }
-  public boolean canBeInSpace(UserGroup.GroupCharacteristics group,Area area){
+  public boolean canBeInSpace(UserGroup group,Area area){
     for(Area a: group.getAccessibleSpaces()){
       if(a==area){
         return true;

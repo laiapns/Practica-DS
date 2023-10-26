@@ -1,9 +1,6 @@
 package baseNoStates.requests;
 
-import baseNoStates.DirectoryDoors;
-import baseNoStates.DirectoryUserGroups;
-import baseNoStates.Door;
-import baseNoStates.User;
+import baseNoStates.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -99,45 +96,15 @@ public class RequestReader implements Request {
       authorized = false;
       addReason("user doesn't exists");
     } else {
-      String userRole = user.getUserRole();
+      UserGroup group = user.getGroup();
       LocalTime currentTime = now.toLocalTime();
-      LocalDateTime dt1 = LocalDateTime.now();
 
-      switch (userRole) {
-        case "employees":
-          LocalDateTime employeesStart = LocalDateTime.of(2023, 9, 1, 8, 00);
-          LocalDateTime employeesFinish = LocalDateTime.of(2024, 3, 1, 8, 00);
-          LocalTime employeesStartHour = LocalTime.of(9, 0);
-          LocalTime employeesFinishHour = LocalTime.of(17, 0);
-          if (now.isAfter(employeesStart) && now.isBefore(employeesFinish)
-              && currentTime.isAfter(employeesStartHour)
-              && currentTime.isBefore(employeesFinishHour)
-              && now.getDayOfWeek() != DayOfWeek.SUNDAY
-              && now.getDayOfWeek() != DayOfWeek.SATURDAY) {
-            authorized = true;
-
-          }
-          break;
-        case "manager":
-          LocalDateTime managerStart = LocalDateTime.of(2023, 9, 1, 8, 00);
-          LocalDateTime managerFinish = LocalDateTime.of(2024, 3, 1, 8, 00);
-          LocalTime managerStartHour = LocalTime.of(8, 0);
-          LocalTime managerFinishHour = LocalTime.of(20, 0);
-          if (now.isAfter(managerStart) && now.isBefore(managerFinish)
-              && currentTime.isAfter(managerStartHour)
-              && currentTime.isBefore(managerFinishHour)
-              && now.getDayOfWeek() != DayOfWeek.SUNDAY) {
-            authorized = true;
-
-          }
-
-          break;
-        case "admin":
+      if (now.isAfter(group.getStartDate()) && now.isBefore(group.getFinishDate())
+          && currentTime.isAfter(group.getStartHour())
+          && currentTime.isBefore(group.getFinishHour())
+          && (group.getWeekPlan().contains(now.getDayOfWeek()))){
           authorized = true;
-          break;
-        default:
-          authorized = false;
-          break;
+
       }
     }
   }

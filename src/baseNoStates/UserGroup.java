@@ -9,100 +9,76 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserGroup {
-  public static final String EMPLOYEES_GROUP = "employees";
-  public static final String MANAGERS_GROUP = "managers";
-  public static final String ADMIN_GROUP = "admin";
-
-
-
-  public static class GroupCharacteristics {
     private String groupName;
 
-    LocalDate startDate;
-    LocalDate finishDate;
+    private LocalDateTime startDate;
+    private LocalDateTime finishDate;
 
-    LocalTime startHour;
-    LocalTime finishHour;
+    private LocalTime startHour;
+    private LocalTime finishHour;
+    private ArrayList<DayOfWeek> weekPlan;
 
     private List<String> allowedActions;
     private ArrayList<Area> accessibleSpaces;
-
     private List<User> users = new ArrayList<>();
+  private List<UserGroup> userGroups = new ArrayList<>();
 
 
-    public GroupCharacteristics(String groupName,LocalDate userStart,LocalDate userFinish,
-                                LocalTime userStartHour,LocalTime userFinishHour,List<String> allowedActions,
-                                ArrayList<Area> accessibleSpaces) {
+
+  public UserGroup(String groupName,LocalDateTime userStart,LocalDateTime userFinish,
+                   LocalTime userStartHour,LocalTime userFinishHour,ArrayList<DayOfWeek> weekPlan,
+                   List<String> allowedActions,ArrayList<Area> accessibleSpaces) {
       this.groupName = groupName;
       this.startDate = userStart;
       this.finishDate = userFinish;
       this.startHour = userStartHour;
       this.finishHour = userFinishHour;
+      this.weekPlan = weekPlan;
       this.allowedActions = allowedActions;
       this.accessibleSpaces = accessibleSpaces;
 
     }
-    public ArrayList<Area> getAccessibleSpaces() {
-      return accessibleSpaces;
-    }
     public void addUser(User user) {
       users.add(user);
     }
-
+    public void addGroup(){userGroups.add((UserGroup)this);}
     public List<User> getUsers() {
       return users;
     }
-
-
+    public List<UserGroup> getGroups() {
+      return userGroups;
+    }
+  public String getGroupName() {
+    return groupName;
   }
 
-  public static final GroupCharacteristics EMPLOYEES_CHARACTERISTICS;
-
-  static {
-    ArrayList<Area> accessibleAreasEmployees = new ArrayList<>();
-    accessibleAreasEmployees.add(DirectoryAreas.findAreaById("hall"));
-    accessibleAreasEmployees.add(DirectoryAreas.findAreaById("room1"));
-    accessibleAreasEmployees.add(DirectoryAreas.findAreaById("room2"));
-    accessibleAreasEmployees.add(DirectoryAreas.findAreaById("room3"));
-    accessibleAreasEmployees.add(DirectoryAreas.findAreaById("corridor"));
-    accessibleAreasEmployees.add(DirectoryAreas.findAreaById("IT"));
-
-    EMPLOYEES_CHARACTERISTICS = new GroupCharacteristics(
-            EMPLOYEES_GROUP,
-            LocalDate.of(2023, 9, 1), // Sep. 1, 2023
-            LocalDate.of(2024, 3, 1), // Mar. 1, 2024
-            LocalTime.of(9, 0), // 9:00 AM
-            LocalTime.of(17, 0), // 5:00 PM
-            Actions.EMPLOYEES_ACTIONS,
-            accessibleAreasEmployees
-    );
-
+  public LocalDateTime getStartDate() {
+    return startDate;
   }
-  public static final GroupCharacteristics MANAGERS_CHARACTERISTICS;
 
-  static {
-    MANAGERS_CHARACTERISTICS = new GroupCharacteristics(
-        MANAGERS_GROUP,
-        LocalDate.of(2023, 9, 1), // Sep. 1, 2023
-        LocalDate.of(2024, 3, 1), // Mar. 1, 2024
-        LocalTime.of(8, 0), // 9:00 AM
-        LocalTime.of(20, 0), // 5:00 PM
-        Actions.OTHERS_ACTIONS,
-        DirectoryAreas.getAllAreas()
-    );
+  public LocalDateTime getFinishDate() {
+    return finishDate;
   }
-  public static final GroupCharacteristics ADMIN_CHARACTERISTICS;
 
-  static {
-    ADMIN_CHARACTERISTICS = new GroupCharacteristics(
-        ADMIN_GROUP,
-        LocalDate.of(2023, 9, 1), // Sep. 1, 2023
-        LocalDate.of(2024, 3, 1), // Mar. 1, 2024
-        LocalTime.of(00, 0), // 9:00 AM
-        LocalTime.of(00, 0), // 5:00 PM
-        Actions.OTHERS_ACTIONS,
-        DirectoryAreas.getAllAreas()
-    );
+  public LocalTime getStartHour() {
+    return startHour;
   }
+
+  public LocalTime getFinishHour() {
+    return finishHour;
+  }
+
+  public ArrayList<DayOfWeek> getWeekPlan() {
+    return weekPlan;
+  }
+
+  public List<String> getAllowedActions() {
+    return allowedActions;
+  }
+
+  public List<UserGroup> getUserGroups() {
+    return userGroups;
+  }
+
 
 }

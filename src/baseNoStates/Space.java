@@ -16,7 +16,10 @@
 
     @Override
     public ArrayList<Door> getDoorsGivingAccess() {
-      return null;
+      return doorsGivingAccess;
+    }
+    public void setDoorsGivingAccess(Door door) {
+      doorsGivingAccess.add(door);
     }
 
     @Override
