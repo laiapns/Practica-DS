@@ -2,28 +2,23 @@ package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class Door {
   private final String id;
   private boolean closed; // physically
-  private boolean locked;
   private DoorState state;
-  private Door door;
   private RequestReader requestReader;
-  private Space spaceFrom;
-  private Space spaceTo;
+  private final Space spaceFrom;
+  private final Space spaceTo;
 
   public Door(String id, Space from, Space to) {
     this.id = id;
     this.state = new Closed(this, id);
-    closed = true;
-    this.door = door;
-    spaceFrom = from;
-    spaceTo = to;
-    spaceTo.setDoorsGivingAccess((Door)this);
+    this.closed = true;
+    this.spaceFrom = from;
+    this.spaceTo = to;
+    this.spaceTo.setDoorsGivingAccess((Door)this);
 
   }
 
