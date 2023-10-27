@@ -16,7 +16,7 @@ public class DirectoryAreas {
     Partition ground_floor = new Partition("ground_floor","basement",building);
 
     Space exterior = new Space("exterior","outside",building);
-    Space stairs = new Space("stairs","stairs to basement and plant 1",building);
+    Space stairs = new Space("stairs","stairs to basement and floor 1",building);
 
     Space parking = new Space("parking","parking",basement);
 

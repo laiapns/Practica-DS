@@ -7,15 +7,14 @@ public class Unlocked extends DoorState {
 
   @Override
   public void open() {
-
     System.out.println("Opening the door: " + name);
-    door.setState(new Opened(door, States.OPENED), false);
+    door.setClosed(false);
   }
 
   @Override
   public void close() {
     System.out.println("Closing the door: " + name);
-    door.setState(new Closed(door, States.CLOSED), true);
+    door.setClosed(true);
   }
 
   @Override

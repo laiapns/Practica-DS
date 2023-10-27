@@ -1,0 +1,201 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class Webserver {
+- {static} PORT :int
+- {static} FORMATTER : DateTimeFormatter
++ Webserver()
+}
+
+class SocketThread {
+- insocked : Socked
+- makeRequest(tokens : String[]) : Request
+- makeRequestReader(tokens : String[]) : RequestReader
+- makeRequestArea(tokens : String[]) : RequestArea
+- makeHeaderAnswer() : String
+- makeJsonAnswer(request : Request) : String
++ run()
+}
+
+Webserver +-right- SocketThread
+
+note right of SocketThread
+inner class
+of Webserver
+end note
+
+class DirectoryDoors {
+- {static} allDoors : Door[]
++ {static} makeDoors()
++ {static} findDoorById(id : String) : Door
++ {static} getAllDoors() : Door[]
+}
+
+DirectoryDoors --> "*" Door : "allDoors"
+
+class DirectoryUserGroups {
+- {static} users : User[]
++ {static} makeUsersGroups()
++ {static} findUserByCredential(credential : String) : User
+}
+DirectoryUserGroups --> "*" UserGroup : "userGroups"
+UserGroup --> "*" User: "users"
+class DirectoryAreas {
+- {static} restArea : Area
+- {static} allDoors : Door[]
+- {static} allAreas : Area[]
++ {static} makeAreas()
++ {static} findDoorById(id : String) : Door
++ {static} findAreaById(id : String) : Area
+}
+
+DirectoryAreas --> "*" Area: "restArea"
+
+abstract class Area {
+- id : String
+- description : String
+- {static} allAreas : Area[]
++ Area(id : String, description : String, parentPartition : Partition)
++ getSpaces : Space[]
++ getAllAreas : Area[]
++ getId : id
++ getDoorsGivingAccess : Door[]
++ findAreaById : Area
+}
+
+class Partition extends Area {
+ - childPartitions : Area[]
+ + Partition (id : String, description : String, parentPartition : Partition)
+ + getId : id
+ + getDoorsGivingAccess : Door[]
+ + findAreaById : Area
+ + addChild()
+ + getSpaces : Space[]
+}
+class Space extends Area {
+- parentPartition : Area[]
++ Space (id : String, description : String, parentPartition : Partition)
++ getId : id
++ getDoorsGivingAccess : Door[]
++ findAreaById : Area
++ getSpaces : Space[]
+}
+
+class Door {
+- id : String
+- closed : boolean
+- locked : boolean
++ Door(id : String)
++ processRequest(request : RequestReader)
++ setState(doorState : DoorState)
++ toJson() : JSONObject
+'+ toString() : String
+'+ isClosed() :boolean
+'+ setClosed(b : boolean)
+'+ getStateName() : String
+- doAction(action : String)
+}
+
+abstract class DoorState extends Door {
+- door: Door
+- name: String
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+
+class Unlocked extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+class UnlockedShortly extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+class Locked extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+class Opened extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+class Closed extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+class Propped extends DoorState{
++ DoorState(door: Door)
++ close()
++ open()
++ lock()
++ unlock()
++ unlockshortly()
++ propper()
+}
+class UserGroup {
+- groupName : String
+- startDate: LocalDateTime
+- finishDate: LocalDateTime
+- startHour: LocalTime
+- finishHour: LocalTime
+- weekPlan: DayOfWeek[]
+- allowedActions: String[]
+- accessibleSpaces: Area[]
+- users : User[]
+- userGroups = UserGroups[]
++ UserGroup()
++ addUser()
++ addGroup()
+}
+class User {
+- name : String
+- credential : String
++ User(name: String, credential: String)
++ toString() : String
+}
+
+
+class Main {
++ {static} main(args : String)
+}
+
+note right of Main::main
+DirectoryDoors.makeDoors()
+DiretoryUsers.makeUsers()
+new Webserver()
+end note
+
+Main -[hidden]down- Webserver
+Webserver -[hidden]down- DirectoryDoors
+@enduml

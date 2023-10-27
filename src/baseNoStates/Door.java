@@ -15,8 +15,7 @@ public class Door extends Observable {
 
   public Door(String id, Space from, Space to) {
     this.id = id;
-    this.state = new Closed(this, id);
-    //this.state = new Unlocked(this, id);
+    this.state = new Unlocked(this, id);
     this.closed = true;
     this.spaceFrom = from;
     this.spaceTo = to;
@@ -75,9 +74,8 @@ public class Door extends Observable {
   }
 
 
-  public boolean isClosed() {
-    return closed;
-  }
+
+  public void setClosed(boolean close) { closed = close; }
 
 //getters
   public String getId() {
@@ -94,6 +92,10 @@ public class Door extends Observable {
 
   public Space getSpaceTo() {
     return spaceTo;
+  }
+
+  public boolean isClosed() {
+    return closed;
   }
 
   @Override

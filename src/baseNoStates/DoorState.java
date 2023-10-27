@@ -2,6 +2,11 @@ package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
 
+/**
+ * The 'DoorState' class represents the state of a door, providing methods to interact with the door,
+ * such as opening, closing, unlocking, locking, unlocking shortly, and performing proper actions.
+ */
+
 public abstract class DoorState extends States {
   protected Door door;
   protected String name;
