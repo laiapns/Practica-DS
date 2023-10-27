@@ -2,19 +2,20 @@ package baseNoStates;
 
 public class Unlocked extends DoorState {
   public Unlocked(Door door, String name) {
-    super(door, name);
+    super(door, States.UNLOCKED);
   }
 
   @Override
   public void open() {
+
     System.out.println("Opening the door: " + name);
-    door.setState(new Opened(door, name), false);
+    door.setState(new Opened(door, States.OPENED), false);
   }
 
   @Override
   public void close() {
     System.out.println("Closing the door: " + name);
-    door.setState(new Closed(door, name), true);
+    door.setState(new Closed(door, States.CLOSED), true);
   }
 
   @Override
@@ -25,7 +26,7 @@ public class Unlocked extends DoorState {
   @Override
   public void lock() {
     if(door.isClosed()){
-      door.setState(new Locked(door, name), true);
+      door.setState(new Locked(door, States.LOCKED), true);
     }else{
       System.out.println("Door " + name + " can't be locked, is open");
     }
@@ -39,5 +40,9 @@ public class Unlocked extends DoorState {
   @Override
   public void propper() {
     System.out.println("Door " + name + " can't be propper");
+  }
+  @Override
+  public String toString() {
+    return States.UNLOCKED;
   }
 }

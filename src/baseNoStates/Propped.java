@@ -2,7 +2,7 @@ package baseNoStates;
 
 public class Propped extends DoorState {
   public Propped(Door door, String name) {
-    super(door, name);
+    super(door, States.PROPPED);
   }
 
   @Override
@@ -12,13 +12,14 @@ public class Propped extends DoorState {
 
   @Override
   public void close() {
-    System.out.println("Locking the door: " + name);
-    door.setState(new Locked(door, name), false);
+    System.out.println("Door " + name + " can't be closed while it's propped");
   }
 
+  //if the door is propped we can change the state to unlocked in order
+  //to quit the propped state
   @Override
   public void unlock() {
-    System.out.println("Door " + name + " can't be unlocked while it's propped");
+    door.setState(new Unlocked(door, States.UNLOCKED), false);
   }
 
   @Override
@@ -34,5 +35,9 @@ public class Propped extends DoorState {
   @Override
   public void propper() {
     System.out.println("Door " + name + " already propped");
+  }
+  @Override
+  public String toString() {
+    return States.PROPPED;
   }
 }

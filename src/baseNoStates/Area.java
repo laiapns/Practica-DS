@@ -16,14 +16,16 @@ public abstract class Area {
     allAreas.add((Area)this);
   }
   public abstract ArrayList<Space> getSpaces();
+
   public static ArrayList<Area> getAllAreas() {
     return allAreas;
   }
+
   public String getId() {
     return id;
   }
 
   public abstract ArrayList<Door> getDoorsGivingAccess();
-  //implementar també getSpaces() i findAreaById()
+
   public abstract Area findAreaById(String areaId);
 }

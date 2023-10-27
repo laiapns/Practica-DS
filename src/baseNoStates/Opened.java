@@ -3,7 +3,7 @@ package baseNoStates;
 public class Opened extends DoorState {
   public Opened(Door door, String name) {
 
-    super(door, name);
+    super(door, States.OPENED);
 
   }
   @Override
@@ -35,5 +35,9 @@ public class Opened extends DoorState {
   @Override
   public void propper() {
     System.out.println("Door " + name + " can't be propper");
+  }
+  @Override
+  public String toString() {
+    return States.OPENED;
   }
 }

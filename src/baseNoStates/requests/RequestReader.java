@@ -96,13 +96,15 @@ public class RequestReader implements Request {
       authorized = false;
       addReason("user doesn't exists");
     } else {
+      userName=user.getName();
       UserGroup group = user.getGroup();
       LocalTime currentTime = now.toLocalTime();
+      setDoorStateName(door.getState().toString());
 
       if (now.isAfter(group.getStartDate()) && now.isBefore(group.getFinishDate())
           && currentTime.isAfter(group.getStartHour())
           && currentTime.isBefore(group.getFinishHour())
-          && (group.getWeekPlan().contains(now.getDayOfWeek()))){
+          && (group.getWeekPlan().contains(now.getDayOfWeek())) && (group.getAllowedActions().contains(action))){
           authorized = true;
 
       }

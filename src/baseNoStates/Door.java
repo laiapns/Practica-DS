@@ -2,9 +2,10 @@ package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
+import java.util.Observable;
 
 
-public class Door {
+public class Door extends Observable {
   private final String id;
   private boolean closed; // physically
   private DoorState state;
@@ -15,11 +16,11 @@ public class Door {
   public Door(String id, Space from, Space to) {
     this.id = id;
     this.state = new Closed(this, id);
+    //this.state = new Unlocked(this, id);
     this.closed = true;
     this.spaceFrom = from;
     this.spaceTo = to;
     this.spaceTo.setDoorsGivingAccess((Door)this);
-
   }
 
   public void processRequest(RequestReader request) {
@@ -34,6 +35,7 @@ public class Door {
     request.setDoorStateName(getStateName());
   }
 
+//switch to the request action in order to change the state throw its class
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
@@ -57,14 +59,19 @@ public class Door {
     }
   }
 
+  //used to set the next state and set if the door is closed
   public void setState(DoorState state, boolean isClosed) {
     if (state != null) {
-        this.state = state;
-        closed=isClosed;
-        System.out.println("Door " + id + " is now in state: " + this.getStateName());
-      } else {
+      this.state = state;
+      closed = isClosed;
+      setChanged();
+      notifyObservers();
+      System.out.println("Door " + id + " is now in state: " + this.getStateName());
+    }
+    else {
         System.out.println("Not authorized to change the state of door " + id);
-      }
+    }
+
   }
 
 
@@ -72,13 +79,21 @@ public class Door {
     return closed;
   }
 
-
+//getters
   public String getId() {
     return id;
   }
 
   public String getStateName() {
     return state.toString();
+  }
+
+  public States getState() {
+    return this.state;
+  }
+
+  public Space getSpaceTo() {
+    return spaceTo;
   }
 
   @Override

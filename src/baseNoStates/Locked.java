@@ -1,11 +1,12 @@
 package baseNoStates;
 
+import java.time.Clock;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Locked extends DoorState {
   public Locked(Door door, String name) {
-    super(door, name);
+    super(door, States.LOCKED);
   }
 
   @Override
@@ -21,7 +22,7 @@ public class Locked extends DoorState {
   @Override
   public void unlock() {
     System.out.println("Unlocking the door: " + name);
-    door.setState(new Unlocked(this.door,this.name), true);
+    door.setState(new Unlocked(this.door,States.UNLOCKED), true);
   }
 
   @Override
@@ -32,21 +33,18 @@ public class Locked extends DoorState {
   @Override
   public void unlockshortly() {
     System.out.println("Unlocking shortly the door: " + name);
-    Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-      public void run() {
-        if (door.isClosed()) {
-          door.setState(new Locked(door,name), true); // Lock the door
-        } else {
-          door.setState(new Propped(door, name), false); // Set to another state
-        }
-        timer.cancel();
-      }
-    }, 1000);
+    Clock clock = Clock.systemDefaultZone();
+    UnlockedShortly unlockedShortly = new UnlockedShortly(door, States.UNLOCKED_SHORTLY, clock);
+    door.setState(unlockedShortly, false);
   }
 
   public void propper() {
     System.out.println("Door " + name + " can't be propper");
+  }
+
+  @Override
+  public String toString() {
+    return States.LOCKED;
   }
 }
 
