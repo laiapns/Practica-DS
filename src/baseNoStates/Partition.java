@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Partition extends Area {
   protected ArrayList<Area> childPartitions = new ArrayList<>();
+  //private ArrayList<Door> doorsArea = new ArrayList<>();
   public Partition (String id, String description, Partition parentPartition) {
     super(id, description, parentPartition);
   }
@@ -14,8 +15,21 @@ public class Partition extends Area {
 
   @Override
   public ArrayList<Door> getDoorsGivingAccess() {
-    return null;
+    ArrayList<Door> doorsArea = new ArrayList<>();
+    getDoorsRecursively(childPartitions, doorsArea);
+    return doorsArea;
   }
+
+  private void getDoorsRecursively(ArrayList<Area> partitions, ArrayList<Door> doorsArea) {
+    for (Area area : partitions) {
+      if (area instanceof Space) {
+        doorsArea.addAll(area.getDoorsGivingAccess());
+      } else if (area instanceof Partition) {
+        getDoorsRecursively(((Partition) area).childPartitions, doorsArea);
+      }
+    }
+  }
+
   @Override
   public Area findAreaById(String areaId) {
     if (this.getId().equals(areaId)) {

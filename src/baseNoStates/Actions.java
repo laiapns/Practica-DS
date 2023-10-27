@@ -13,7 +13,7 @@ public final class Actions {
   public static final String CLOSE = "close";
 
   //array of actions for group employees
-  public static final List<String> EMPLOYEES_ACTIONS = Arrays.asList(
+  public static final List<String> EMPLOYEES_ACTIONS = Arrays.asList(OPEN, CLOSE,
       UNLOCK_SHORTLY);
 
   //array of actions for group managers and group admin
