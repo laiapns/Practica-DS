@@ -104,7 +104,8 @@ public class RequestReader implements Request {
       if (now.isAfter(group.getStartDate()) && now.isBefore(group.getFinishDate())
           && currentTime.isAfter(group.getStartHour())
           && currentTime.isBefore(group.getFinishHour())
-          && (group.getWeekPlan().contains(now.getDayOfWeek())) && (group.getAllowedActions().contains(action))){
+          && (group.getWeekPlan().contains(now.getDayOfWeek())) && (group.getAllowedActions().contains(action))
+          && (user.canBeInSpace(group, door.getSpaceTo()))){
           authorized = true;
 
       }

@@ -1,9 +1,5 @@
 package baseNoStates;
 
-import java.time.Clock;
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class Locked extends DoorState {
   public Locked(Door door, String name) {
     super(door, States.LOCKED);
@@ -33,9 +29,9 @@ public class Locked extends DoorState {
   @Override
   public void unlockshortly() {
     System.out.println("Unlocking shortly the door: " + name);
-    Clock clock = Clock.systemDefaultZone();
-    UnlockedShortly unlockedShortly = new UnlockedShortly(door, States.UNLOCKED_SHORTLY, clock);
-    door.setState(unlockedShortly, false);
+    Clock clock = new Clock(10, door);
+    UnlockedShortly unlockedShortly = new UnlockedShortly(door, name, clock);
+    door.setState(unlockedShortly, true);
   }
 
   public void propper() {

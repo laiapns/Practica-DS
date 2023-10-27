@@ -1,38 +1,38 @@
 package baseNoStates;
 
-import java.time.Clock;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Observable;
 import java.util.Observer;
 
 
 public class UnlockedShortly extends DoorState implements Observer {
-  private Instant startTime;
   private final Clock clock;
 
 
   public UnlockedShortly(Door door, String name, Clock clock) {
     super(door, States.UNLOCKED_SHORTLY);
     this.clock = clock;
-    this.startTime = this.clock.instant();
+    this.clock.start();
     door.addObserver(this); //door: Observable //UnlockedShortly: Observer
-
+    System.out.println("Clock started with period: " + this.clock.getPeriod());
   }
 
   @Override
   public void open() {
-    Duration duration = Duration.between(startTime, clock.instant());
-    if (duration.getSeconds() >= 10) {
-      System.out.println("Door : " + name + " may be propped");
-      door.setState(new Propped(door, States.PROPPED), false);
-    }
+    System.out.println("Opening the door: " + name);
+    door.setClosed(false);
   }
+
+
 
   @Override
   public void close() {
-    System.out.println("Locking the door: " + name);
-    door.setState(new Locked(door, States.LOCKED), true);
+    if (this.clock.getElapsedSeconds() >= 10) {
+      System.out.println("Door : " + name + " may be propped");
+      door.setState(new Propped(door, States.PROPPED), false);
+    } else {
+      System.out.println("Locking the door: " + name);
+      door.setState(new Locked(door, States.LOCKED), true);
+    }
   }
 
   @Override
@@ -62,14 +62,15 @@ public class UnlockedShortly extends DoorState implements Observer {
   @Override
   public void update(Observable o, Object arg) {
     if (arg instanceof DoorState) {
-      Duration duration = Duration.between(startTime, clock.instant());
-      if ((duration.getSeconds() >= 10)
-          && (door.isClosed())) {
+      if ((this.clock.getElapsedSeconds() >= 10)
+              && (door.isClosed())) {
         door.setState(new Locked(door, States.LOCKED), true);
-      } else if ((duration.getSeconds() >= 10)
-          && (!door.isClosed())) {
+        this.clock.stop();
+      } else if ((this.clock.getElapsedSeconds() >= 10)
+              && (!door.isClosed())) {
         System.out.println("Door : " + name + " may be propped");
-        door.setState(new Propped(door, States.PROPPED),  false);
+        door.setState(new Propped(door, States.PROPPED), false);
+        this.clock.stop();
       }
     }
   }
