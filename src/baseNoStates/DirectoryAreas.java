@@ -3,6 +3,12 @@ package baseNoStates;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The 'DirectoryAreas' class is responsible for defining and managing areas and doors within a building's layout.
+ * It defines various areas, such as partitions and spaces, and their relationships. The class also includes methods
+ * for finding areas and doors by their identifiers and obtaining lists of all areas and doors in the building.
+ */
+
 public class DirectoryAreas {
   private static Area restArea;
   private static ArrayList<Door> allDoors;

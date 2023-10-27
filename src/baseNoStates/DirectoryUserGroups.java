@@ -10,6 +10,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The 'DirectoryUserGroups' class is responsible for creating and managing user groups and users
+ * in a building's security directory. It defines different user groups, including employees, managers,
+ * and administrators, and sets their characteristics, such as access permissions, working hours,
+ * and accessible areas. The class also includes methods for finding users by their credentials.
+ */
 
 public final class DirectoryUserGroups {
   private static final ArrayList<User> users = new ArrayList<>();

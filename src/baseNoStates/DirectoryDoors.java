@@ -3,6 +3,12 @@ package baseNoStates;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The 'DirectoryDoors' class is responsible for creating and managing doors within a building's security system.
+ * It defines various doors and their connections, such as which spaces they connect. The class also includes methods
+ * for finding doors by their identifiers and obtaining a list of all doors in the building.
+ */
+
 public final class DirectoryDoors {
   private static ArrayList<Door> allDoors;
 

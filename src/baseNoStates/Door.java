@@ -4,6 +4,11 @@ import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 import java.util.Observable;
 
+/**
+ * The 'Door' class represents a physical door within a building. It manages the door's state, open or closed,
+ * and processes requests for actions such as opening, closing, locking, and unlocking. The class also interacts
+ * with a 'DoorState' to change the door's state based
+*/
 
 public class Door extends Observable {
   private final String id;

@@ -1,7 +1,13 @@
 package baseNoStates;
 
 import java.util.ArrayList;
-import baseNoStates.UserGroup;
+
+/**
+ * The 'User' class represents a user in a building's security system. Users have a name, a credential
+ * for identification, and belong to a specific 'UserGroup' that defines their access permissions.
+ * Users can access areas within the building based on their group's accessible spaces.
+ */
+
 
 public class User {
   private final String name;
@@ -9,10 +15,7 @@ public class User {
 
   private final UserGroup group;
 
-
   private ArrayList<Area> accessibleSpaces;
-
-
 
   public User(String name,String credential,UserGroup group) {
     this.name = name;
