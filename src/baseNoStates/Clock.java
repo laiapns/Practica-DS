@@ -2,31 +2,41 @@ package baseNoStates;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Clock {
-    private LocalDateTime startTime;
+public class Clock extends Observable {
+    private static Clock instance = null;
     private LocalDateTime date;
-    private Door door;
     private Timer timer;
-    private int period;
+    private int period = 1;
 
-    public Clock(int period, Door door) {
-        this.period = period;
+    private Clock() {
         this.timer = new Timer();
-        this.door = door;
+    }
+
+    public static Clock getInstance() {
+        if (instance == null) {
+            instance = new Clock();
+        }
+        return instance;
+    }
+
+    public void setPeriod(int period){
+        this.period = period;
     }
 
     public void start() {
-        startTime = LocalDateTime.now();
         TimerTask repeatedTask = new TimerTask() {
             public void run() {
                 date = LocalDateTime.now();
                 System.out.println("run() executed at " + date);
+                setChanged();
+                notifyObservers();
             }
         };
-        timer.scheduleAtFixedRate(repeatedTask, 0, 1000 * period);
+        timer.scheduleAtFixedRate(repeatedTask, 0, 1000L * period);
     }
 
     public void stop() {
@@ -36,10 +46,9 @@ public class Clock {
     public int getPeriod() {
         return period;
     }
-    public long getElapsedSeconds() {
+    public long getElapsedSecondsFrom(LocalDateTime fromTime) {
         LocalDateTime now = LocalDateTime.now();
-        return Duration.between(startTime, now).getSeconds();
+        return Duration.between(fromTime, now).getSeconds();
     }
-
 }
 

@@ -5,9 +5,11 @@ package baseNoStates;
 
 public class Main {
   public static void main(String[] args) {
+    Clock.getInstance().start();
     DirectoryAreas.makeAreas();
     DirectoryUserGroups.makeUserGroups();
     DirectoryDoors.makeDoors();
     new WebServer();
+    Clock.getInstance().stop();
   }
 }

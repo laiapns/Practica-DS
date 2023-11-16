@@ -10,7 +10,7 @@ import java.util.Observable;
  * with a 'DoorState' to change the door's state based
 */
 
-public class Door extends Observable {
+public class Door {
   private final String id;
   private boolean closed; // physically
   private DoorState state;
@@ -68,14 +68,11 @@ public class Door extends Observable {
     if (state != null) {
       this.state = state;
       closed = isClosed;
-      setChanged();
-      notifyObservers();
       System.out.println("Door " + id + " is now in state: " + this.getStateName());
     }
     else {
         System.out.println("Not authorized to change the state of door " + id);
     }
-
   }
 
 
