@@ -1,18 +1,22 @@
 package baseNoStates;
 
+import org.slf4j.Logger;
+
 public class Propped extends DoorState {
+
+  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Propped.class);
   public Propped(Door door, String name) {
     super(door, States.PROPPED);
   }
 
   @Override
   public void open() {
-    System.out.println("Door " + name + " already open");
+    LOGGER.warn("Door " + name + " already open");
   }
 
   @Override
   public void close() {
-    System.out.println("Door " + name + " can't be closed while it's propped");
+    LOGGER.warn("Door " + name + " can't be closed while it's propped");
   }
 
   //if the door is propped we can change the state to unlocked in order
@@ -24,17 +28,17 @@ public class Propped extends DoorState {
 
   @Override
   public void lock() {
-    System.out.println("Door " + name + " can't be locked while it's propped");
+    LOGGER.warn("Door " + name + " can't be locked while it's propped");
   }
 
   @Override
   public void unlockshortly() {
-    System.out.println("Door " + name + " can't be unlocked while it's propped");
+    LOGGER.warn("Door " + name + " can't be unlocked while it's propped");
   }
 
   @Override
   public void propper() {
-    System.out.println("Door " + name + " already propped");
+    LOGGER.warn("Door " + name + " already propped");
   }
   @Override
   public String toString() {

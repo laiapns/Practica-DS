@@ -1,25 +1,29 @@
 package baseNoStates;
 
+import org.slf4j.Logger;
+
 public class Unlocked extends DoorState {
+
+  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Unlocked.class);
   public Unlocked(Door door, String name) {
     super(door, States.UNLOCKED);
   }
 
   @Override
   public void open() {
-    System.out.println("Opening the door: " + name);
+    LOGGER.info("Opening the door: " + name);
     door.setClosed(false);
   }
 
   @Override
   public void close() {
-    System.out.println("Closing the door: " + name);
+    LOGGER.info("Closing the door: " + name);
     door.setClosed(true);
   }
 
   @Override
   public void unlock() {
-    System.out.println("Door " + name + " already unlocked");
+    LOGGER.warn("Door " + name + " already unlocked");
   }
 
   @Override
@@ -27,18 +31,18 @@ public class Unlocked extends DoorState {
     if(door.isClosed()){
       door.setState(new Locked(door, States.LOCKED), true);
     }else{
-      System.out.println("Door " + name + " can't be locked, is open");
+      LOGGER.warn("Door " + name + " can't be locked, is open");
     }
   }
 
   @Override
   public void unlockshortly() {
-    System.out.println("Door " + name + " already unlocked");
+    LOGGER.warn("Door " + name + " already unlocked");
   }
 
   @Override
   public void propper() {
-    System.out.println("Door " + name + " can't be propper");
+    LOGGER.warn("Door " + name + " can't be propper");
   }
   @Override
   public String toString() {

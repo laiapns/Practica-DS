@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.slf4j.Logger;
 
 public class Clock extends Observable {
     private static Clock instance = null;
     private LocalDateTime date;
     private Timer timer;
     private int period = 1;
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Clock.class);
 
     private Clock() {
         this.timer = new Timer();
@@ -31,7 +33,7 @@ public class Clock extends Observable {
         TimerTask repeatedTask = new TimerTask() {
             public void run() {
                 date = LocalDateTime.now();
-                System.out.println("run() executed at " + date);
+                LOGGER.debug("executed at" + date);
                 setChanged();
                 notifyObservers();
             }

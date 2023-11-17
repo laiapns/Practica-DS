@@ -2,6 +2,8 @@ package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+
 import java.util.Observable;
 
 /**
@@ -11,6 +13,8 @@ import java.util.Observable;
 */
 
 public class Door {
+
+  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Door.class);
   private final String id;
   private boolean closed; // physically
   private DoorState state;
@@ -34,7 +38,7 @@ public class Door {
       String action = request.getAction();
       doAction(action);
     } else {
-      System.out.println("not authorized");
+      LOGGER.warn("not authorized");
     }
     request.setDoorStateName(getStateName());
   }
@@ -68,10 +72,10 @@ public class Door {
     if (state != null) {
       this.state = state;
       closed = isClosed;
-      System.out.println("Door " + id + " is now in state: " + this.getStateName());
+      LOGGER.debug("Door " + id + " is now in state: " + this.getStateName());
     }
     else {
-        System.out.println("Not authorized to change the state of door " + id);
+        LOGGER.warn("Not authorized to change the state of door " + id);
     }
   }
 

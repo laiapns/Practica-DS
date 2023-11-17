@@ -1,5 +1,7 @@
 package baseNoStates;
 
+import org.slf4j.Logger;
+
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Observable;
@@ -7,6 +9,8 @@ import java.util.Observer;
 
 
 public class UnlockedShortly extends DoorState implements Observer {
+
+  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(UnlockedShortly.class);
   private final Clock clock = Clock.getInstance();
   private LocalDateTime subscriptionTime;
 
@@ -14,12 +18,12 @@ public class UnlockedShortly extends DoorState implements Observer {
     super(door, States.UNLOCKED_SHORTLY);
     clock.addObserver(this);
     subscriptionTime = LocalDateTime.now();
-    System.out.println("Clock update with period: " + this.clock.getPeriod());
+    LOGGER.debug("Clock update with period: " + this.clock.getPeriod());
   }
 
   @Override
   public void open() {
-    System.out.println("Opening the door: " + name);
+    LOGGER.info("Opening the door: " + name);
     door.setClosed(false);
   }
 
@@ -32,23 +36,23 @@ public class UnlockedShortly extends DoorState implements Observer {
       System.out.println("Locking the door: " + name);
       door.setState(new Locked(door, States.LOCKED), true);
     }*/
-    System.out.println("Closing the door: " + name);
+    LOGGER.info("Closing the door: " + name);
     door.setClosed(true);
   }
 
   @Override
   public void unlock() {
-    System.out.println("Door " + name + " already unlocked");
+    LOGGER.warn("Door " + name + " already unlocked");
   }
 
   @Override
   public void lock() {
-    System.out.println("Door " + name + " can't be locked while is unlocked shortly");
+    LOGGER.warn("Door " + name + " can't be locked while is unlocked shortly");
   }
 
   @Override
   public void unlockshortly() {
-    System.out.println("Door " + name + " is already unlocked shortly");
+    LOGGER.warn("Door " + name + " is already unlocked shortly");
   }
 
   @Override
@@ -63,7 +67,7 @@ public class UnlockedShortly extends DoorState implements Observer {
   @Override
   public void update(Observable o, Object arg) {
     long seconds = clock.getElapsedSecondsFrom(subscriptionTime);
-    System.out.println("Update con el segundo: "+ seconds);
+    LOGGER.debug("Update con el segundo: "+ seconds);
     if (seconds >= 10) {
       if (door.isClosed()) {
         door.setState(new Locked(this.door, States.LOCKED), true);

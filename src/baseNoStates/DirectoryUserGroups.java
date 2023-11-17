@@ -1,6 +1,7 @@
 package baseNoStates;
 
 import baseNoStates.requests.RequestReader;
+import org.slf4j.Logger;
 
 
 import java.time.DayOfWeek;
@@ -18,6 +19,8 @@ import java.util.Arrays;
  */
 
 public final class DirectoryUserGroups {
+
+  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(DirectoryUserGroups.class);
   private static final ArrayList<User> users = new ArrayList<>();
   RequestReader requestReader;
 
@@ -114,7 +117,7 @@ public final class DirectoryUserGroups {
         return user;
       }
     }
-    System.out.println("user with credential " + credential + " not found");
+    LOGGER.warn("user with credential " + credential + " not found");
     return null; // otherwise we get a Java error
   }
 
