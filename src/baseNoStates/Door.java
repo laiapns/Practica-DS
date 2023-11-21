@@ -4,34 +4,36 @@ import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
-import java.util.Observable;
 
 /**
- * The 'Door' class represents a physical door within a building. It manages the door's state, open or closed,
- * and processes requests for actions such as opening, closing, locking, and unlocking. The class also interacts
+ * The 'Door' class represents a physical door within
+ * a building. It manages the door's state, open or closed,
+ * and processes requests for actions such as opening,
+ * closing, locking, and unlocking. The class also interacts
  * with a 'DoorState' to change the door's state based
 */
 
 public class Door {
 
-  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Door.class);
-  private final String id;
+  private static final Logger LOGGER =
+      org.slf4j.LoggerFactory.getLogger(Door.class);
+  private final String doorId;
   private boolean closed; // physically
-  private DoorState state;
+  private DoorState doorState;
   private RequestReader requestReader;
   private final Space spaceFrom;
   private final Space spaceTo;
 
-  public Door(String id, Space from, Space to) {
-    this.id = id;
-    this.state = new Unlocked(this, id);
+  public Door(final String id, final Space from, final Space to) {
+    this.doorId = id;
+    this.doorState = new Unlocked(this, id);
     this.closed = true;
     this.spaceFrom = from;
     this.spaceTo = to;
-    this.spaceTo.setDoorsGivingAccess((Door)this);
+    this.spaceTo.setDoorsGivingAccess((Door) this);
   }
 
-  public void processRequest(RequestReader request) {
+  public void processRequest(final RequestReader request) {
     // it is the Door that process the request because the door has and knows
     // its state, and if closed or open
     if (request.isAuthorized()) {
@@ -44,22 +46,22 @@ public class Door {
   }
 
 //switch to the request action in order to change the state throw its class
-  private void doAction(String action) {
+  private void doAction(final String action) {
     switch (action) {
       case Actions.OPEN:
-        state.open();
+        doorState.open();
         break;
       case Actions.CLOSE:
-        state.close();
+        doorState.close();
         break;
       case Actions.LOCK:
-        state.lock();
+        doorState.lock();
         break;
       case Actions.UNLOCK:
-        state.unlock();
+        doorState.unlock();
         break;
       case Actions.UNLOCK_SHORTLY:
-        state.unlockshortly();
+        doorState.unlockshortly();
         break;
       default:
         assert false : "Unknown action " + action;
@@ -68,32 +70,34 @@ public class Door {
   }
 
   //used to set the next state and set if the door is closed
-  public void setState(DoorState state, boolean isClosed) {
+  public void setState(final DoorState state, final boolean isClosed) {
     if (state != null) {
-      this.state = state;
+      this.doorState = state;
       closed = isClosed;
-      LOGGER.debug("Door " + id + " is now in state: " + this.getStateName());
-    }
-    else {
-        LOGGER.warn("Not authorized to change the state of door " + id);
+      LOGGER.debug("Door " + doorId + " is now in state: "
+          + this.getStateName());
+    } else {
+        LOGGER.warn("Not authorized to change the state of door "
+            + doorId);
     }
   }
 
 
 
-  public void setClosed(boolean close) { closed = close; }
-
+  public void setClosed(final boolean close) {
+    closed = close;
+  }
 //getters
   public String getId() {
-    return id;
+    return doorId;
   }
 
   public String getStateName() {
-    return state.toString();
+    return doorState.toString();
   }
 
   public States getState() {
-    return this.state;
+    return this.doorState;
   }
 
   public Space getSpaceTo() {
@@ -107,7 +111,7 @@ public class Door {
   @Override
   public String toString() {
     return "Door{"
-        + ", id='" + id + '\''
+        + ", id='" + doorId + '\''
         + ", closed=" + closed
         + ", state=" + getStateName()
         + "}";
@@ -115,7 +119,7 @@ public class Door {
 
   public JSONObject toJson() {
     JSONObject json = new JSONObject();
-    json.put("id", id);
+    json.put("id", doorId);
     json.put("state", getStateName());
     json.put("closed", closed);
     return json;

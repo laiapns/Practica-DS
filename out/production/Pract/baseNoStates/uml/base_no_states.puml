@@ -81,6 +81,31 @@ class Space extends Area {
 + findAreaById : Area
 + getSpaces : Space[]
 }
+class Clock {
+      - startTime: LocalDateTime
+      - date: LocalDateTime
+      - door: Door
+      - timer: Timer
+      - period: int
+      + Clock(period: int, door: Door)
+      + start()
+      + stop()
+      + getPeriod(): int
+      + getElapsedSeconds(): long
+}
+interface Observer {
+  + update()
+}
+
+interface Observable {
+  + notifyObservers()
+}
+
+Door --|> Observable
+
+UnlockedShortly --|> Observer
+
+Partition -[hidden]down- Clock
 
 class Door {
 - id : String

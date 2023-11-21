@@ -4,45 +4,46 @@ import org.slf4j.Logger;
 
 public class Unlocked extends DoorState {
 
-  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(Unlocked.class);
-  public Unlocked(Door door, String name) {
+  private static final Logger LOGGER =
+      org.slf4j.LoggerFactory.getLogger(Unlocked.class);
+  public Unlocked(final Door door, final String name) {
     super(door, States.UNLOCKED);
   }
 
   @Override
   public void open() {
-    LOGGER.info("Opening the door: " + name);
-    door.setClosed(false);
+    LOGGER.info("Opening the door: " + getName());
+    getDoor().setClosed(false);
   }
 
   @Override
   public void close() {
-    LOGGER.info("Closing the door: " + name);
-    door.setClosed(true);
+    LOGGER.info("Closing the door: " + getName());
+    getDoor().setClosed(true);
   }
 
   @Override
   public void unlock() {
-    LOGGER.warn("Door " + name + " already unlocked");
+    LOGGER.warn("Door " + getName() + " already unlocked");
   }
 
   @Override
   public void lock() {
-    if(door.isClosed()){
-      door.setState(new Locked(door, States.LOCKED), true);
-    }else{
-      LOGGER.warn("Door " + name + " can't be locked, is open");
+    if (getDoor().isClosed()) {
+      getDoor().setState(new Locked(getDoor(), States.LOCKED), true);
+    } else {
+      LOGGER.warn("Door " + getName() + " can't be locked, is open");
     }
   }
 
   @Override
   public void unlockshortly() {
-    LOGGER.warn("Door " + name + " already unlocked");
+    LOGGER.warn("Door " + getName() + " already unlocked");
   }
 
   @Override
   public void propper() {
-    LOGGER.warn("Door " + name + " can't be propper");
+    LOGGER.warn("Door " + getName() + " can't be propper");
   }
   @Override
   public String toString() {

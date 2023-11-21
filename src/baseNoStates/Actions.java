@@ -13,10 +13,16 @@ public final class Actions {
   public static final String CLOSE = "close";
 
   //array of actions for group employees
-  public static final List<String> EMPLOYEES_ACTIONS = Arrays.asList(OPEN, CLOSE,
+  public static final List<String> EMPLOYEES_ACTIONS =
+      Arrays.asList(OPEN, CLOSE,
       UNLOCK_SHORTLY);
 
   //array of actions for group managers and group admin
   public static final List<String> OTHERS_ACTIONS = Arrays.asList(
-      LOCK, UNLOCK, UNLOCK_SHORTLY, OPEN, CLOSE );
+      LOCK, UNLOCK, UNLOCK_SHORTLY, OPEN, CLOSE);
+
+  // Private constructor to prevent instantiation
+  private Actions() {
+    throw new AssertionError("No instanciar una clase de utilidad");
+  }
 }

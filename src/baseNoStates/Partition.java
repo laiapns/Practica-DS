@@ -3,20 +3,24 @@ package baseNoStates;
 import java.util.ArrayList;
 
 /**
- * The 'Partition' class represents a specific area within a building that can contain other partitions or spaces.
- * It extends the 'Area' class to inherit common properties and functionality for building areas.
- * This class can have child partitions and provides methods to access doors, find areas by ID, and retrieve spaces within it.
+ * The 'Partition' class represents a specific area within
+ * a building that can contain other partitions or spaces.
+ * It extends the 'Area' class to inherit common properties
+ * and functionality for building areas.
+ * This class can have child partitions and provides methods
+ * to access doors, find areas by ID, and retrieve spaces within it.
  */
 
 public class Partition extends Area {
-  protected ArrayList<Area> childPartitions = new ArrayList<>();
+  private ArrayList<Area> childPartitions = new ArrayList<>();
   //private ArrayList<Door> doorsArea = new ArrayList<>();
-  public Partition (String id, String description, Partition parentPartition) {
+  public Partition(final String id, final String description,
+                   final Partition parentPartition) {
     super(id, description, parentPartition);
   }
 
-  public String getId(){
-    return id;
+  public String getId() {
+    return getId();
   }
 
   @Override
@@ -26,7 +30,8 @@ public class Partition extends Area {
     return doorsArea;
   }
 
-  private void getDoorsRecursively(ArrayList<Area> partitions, ArrayList<Door> doorsArea) {
+  private void getDoorsRecursively(final ArrayList<Area> partitions,
+                                   final ArrayList<Door> doorsArea) {
     for (Area area : partitions) {
       if (area instanceof Space) {
         doorsArea.addAll(area.getDoorsGivingAccess());
@@ -37,7 +42,7 @@ public class Partition extends Area {
   }
 
   @Override
-  public Area findAreaById(String areaId) {
+  public Area findAreaById(final String areaId) {
     if (this.getId().equals(areaId)) {
       return this;
     }
@@ -51,7 +56,7 @@ public class Partition extends Area {
   }
 
 
-  public void addChild(Area child) {
+  public void addChild(final Area child) {
     childPartitions.add(child);
   }
 

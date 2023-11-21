@@ -3,46 +3,46 @@ package baseNoStates;
 import java.util.ArrayList;
 
 /**
- * The 'User' class represents a user in a building's security system. Users have a name, a credential
- * for identification, and belong to a specific 'UserGroup' that defines their access permissions.
- * Users can access areas within the building based on their group's accessible spaces.
+ * The 'User' class represents a user in a building's
+ * security system. Users have a name, a credential
+ * for identification, and belong to a specific 'UserGroup'
+ * that defines their access permissions.
+ * Users can access areas within the building based on
+ * their group's accessible spaces.
  */
 
 
 public class User {
-  private final String name;
-  private final String credential;
+  private final String userName;
+  private final String userCredential;
 
-  private final UserGroup group;
+  private final UserGroup userGroup;
 
   private ArrayList<Area> accessibleSpaces;
 
-  public User(String name,String credential,UserGroup group) {
-    this.name = name;
-    this.credential = credential;
-    this.accessibleSpaces=new ArrayList<>();
-    this.group = group;
+  public User(final String name, final String credential, final UserGroup group) {
+    this.userName = name;
+    this.userCredential = credential;
+    this.accessibleSpaces = new ArrayList<>();
+    this.userGroup = group;
 
   }
   public String getName() {
-    return name;
+    return userName;
   }
   public UserGroup getGroup() {
-    return group;
+    return userGroup;
   }
   public String getCredential() {
-    return credential;
+    return userCredential;
   }
 
-  private ArrayList<Area> getSpaces(){
+  private ArrayList<Area> getSpaces() {
     return accessibleSpaces;
   }
-  /*public void addSpace(UserGroup group){
-    accessibleSpaces = group.getAccessibleSpaces();
-  }*/
-  public boolean canBeInSpace(UserGroup group,Area area){
-    for(Area a: group.getAccessibleSpaces()){
-      if(a==area){
+  public boolean canBeInSpace(final UserGroup group, final Area area) {
+    for (Area a: group.getAccessibleSpaces()) {
+      if (a == area) {
         return true;
       }
     }
@@ -51,6 +51,6 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{name=" + name + ", credential=" + credential + "}";
+    return "User{name=" + userName + ", credential=" + userCredential + "}";
   }
 }
