@@ -14,6 +14,12 @@ public abstract class DoorState extends States {
   private String name;
   private RequestReader requestReader;
 
+  /**
+   * Constructor for the 'DoorState' class.
+   *
+   * @param d The door associated with this state.
+   * @param n The name of the door state.
+   */
   public DoorState(final Door d, final String n) {
     this.door = d;
     this.name = n;

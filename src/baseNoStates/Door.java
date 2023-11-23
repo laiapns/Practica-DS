@@ -24,6 +24,13 @@ public class Door {
   private final Space spaceFrom;
   private final Space spaceTo;
 
+  /**
+   * Constructor for the 'Door' class.
+   *
+   * @param id   The unique identifier for the door.
+   * @param from The space from which the door opens.
+   * @param to   The space to which the door leads.
+   */
   public Door(final String id, final Space from, final Space to) {
     this.doorId = id;
     this.doorState = new Unlocked(this, id);

@@ -61,12 +61,19 @@ public class UnlockedShortly extends DoorState implements Observer {
     getDoor().setState(new Propped(getDoor(), States.PROPPED), false);
   }
 
-  // in order to be aware of the state of the door,
-  // we implement the Observer Patron
-  // if the door is set to UnlockedShortly the observer
-  // while set a clock that will wait 10 seconds.
-  // after this 10 seconds if the door is closed it will
-  // change the door to Locked, otherwise will set the door Propped
+
+  /**
+   * Updates the door state based on the elapsed time since subscription.
+   * in order to be aware of the state of the door,
+   * we implement the Observer Patron
+   * if the door is set to UnlockedShortly the observer
+   * while set a clock that will wait 10 seconds.
+   * after this 10 seconds if the door is closed it will
+   * change the door to Locked, otherwise will set the door Propped
+   *
+   * @param o   The observable object (clock).
+   * @param arg The argument passed to notifyObservers.
+   */
   @Override
   public void update(final Observable o, final Object arg) {
     long seconds = clock.getElapsedSecondsFrom(subscriptionTime);

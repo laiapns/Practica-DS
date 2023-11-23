@@ -20,6 +20,13 @@ public class User {
 
   private ArrayList<Area> accessibleSpaces;
 
+  /**
+   * Constructs a user with the specified name, credential, and user group.
+   *
+   * @param name       The name of the user.
+   * @param credential The credential for user identification.
+   * @param group      The user group to which the user belongs.
+   */
   public User(final String name, final String credential, final UserGroup group) {
     this.userName = name;
     this.userCredential = credential;
