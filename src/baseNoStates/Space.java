@@ -14,10 +14,8 @@ import java.util.ArrayList;
  */
 
 public class Space extends Area {
-  private Partition parentPartition;
-  private final ArrayList<Door> doorsGivingAccess = new ArrayList<>();
-  public Space(final String id, final String description, final Partition partition) {
-    super(id, description, partition);
+  public Space(final String id, final String description) {
+    super(id, description);
   }
 
   public String getId() {
@@ -25,26 +23,8 @@ public class Space extends Area {
   }
 
   @Override
-  public ArrayList<Door> getDoorsGivingAccess() {
-    return doorsGivingAccess;
-  }
-  public void setDoorsGivingAccess(final Door door) {
-    doorsGivingAccess.add(door);
-  }
-
-  @Override
-  public Area findAreaById(final String areaId) {
-    if (this.getId().equals(areaId)) {
-      return this;
-    }
-    return null;
-  }
-
-  @Override
-  public ArrayList<Space> getSpaces() {
-    ArrayList<Space> spaces = new ArrayList<>();
-    spaces.add(this);
-    return spaces;
+  public void accept(AreaVisitor visitor) {
+    visitor.visit(this);
   }
 
 }

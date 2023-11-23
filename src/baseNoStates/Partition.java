@@ -13,10 +13,9 @@ import java.util.ArrayList;
 
 public class Partition extends Area {
   private ArrayList<Area> childPartitions = new ArrayList<>();
-  //private ArrayList<Door> doorsArea = new ArrayList<>();
-  public Partition(final String id, final String description,
-                   final Partition parentPartition) {
-    super(id, description, parentPartition);
+
+  public Partition(final String id, final String description) {
+    super(id, description);
   }
 
   public String getId() {
@@ -24,53 +23,17 @@ public class Partition extends Area {
   }
 
   @Override
-  public ArrayList<Door> getDoorsGivingAccess() {
-    ArrayList<Door> doorsArea = new ArrayList<>();
-    getDoorsRecursively(childPartitions, doorsArea);
-    return doorsArea;
-  }
-
-  private void getDoorsRecursively(final ArrayList<Area> partitions,
-                                   final ArrayList<Door> doorsArea) {
-    for (Area area : partitions) {
-      if (area instanceof Space) {
-        doorsArea.addAll(area.getDoorsGivingAccess());
-      } else if (area instanceof Partition) {
-        getDoorsRecursively(((Partition) area).childPartitions, doorsArea);
-      }
+  public void accept(AreaVisitor visitor) {
+    visitor.visit(this);
+    for (Area child : childPartitions) {
+      child.accept(visitor);
     }
   }
 
-  @Override
-  public Area findAreaById(final String areaId) {
-    if (this.getId().equals(areaId)) {
-      return this;
-    }
-    for (Area area : childPartitions) {
-      Area foundArea = area.findAreaById(areaId);
-      if (foundArea != null) {
-        return foundArea;
-      }
-    }
-    return null;
-  }
-
-
-  public void addChild(final Area child) {
+  public void addChild(Area child) {
     childPartitions.add(child);
   }
 
-  @Override
-  public ArrayList<Space> getSpaces() {
-    ArrayList<Space> spaces = new ArrayList<>();
-    for (Area child : childPartitions) {
-      if (child instanceof Space) {
-        spaces.add((Space) child);
-      } else if (child instanceof Partition) {
-        spaces.addAll(((Partition) child).getSpaces());
-      }
-    }
-    return spaces;
-  }
+
 
 }
