@@ -1,0 +1,8 @@
+En aquesta fita ens vam dividir el treball que haviem de fer per poder gestionar-ho més fàcilment cadascú.
+Adrián Bello: Va treballar en canviar el Clock i sigués un Singleton, i va fer les modificacions a logback.xml per a que funciones els logs.
+Laia Pons: Va modificar tots els prints per Logs i va comentar totes les classes necessàries i les funciones necessàries.
+Arnau Piquè: Va estar encarregat de modificar el necessari per a cada canvi que es feia per solucionar els warnings del CheckStyle.
+
+Adrián Bello	1566292
+Laia Pons	1598057
+Arnau Piqué	1563976

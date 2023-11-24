@@ -87,7 +87,7 @@ class Clock {
       - door: Door
       - timer: Timer
       - period: int
-      - Clock()
+      + Clock(period: int, door: Door)
       + start()
       + stop()
       + getPeriod(): int
@@ -101,7 +101,7 @@ interface Observable {
   + notifyObservers()
 }
 
-Clock --|> Observable
+Door --|> Observable
 
 UnlockedShortly --|> Observer
 

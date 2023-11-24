@@ -26,8 +26,7 @@ public class WebServer {
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
   public WebServer() {
-    try {
-      ServerSocket serverConnect = new ServerSocket(PORT);
+    try (ServerSocket serverConnect = new ServerSocket(PORT)) {
       LOGGER.debug("Server started.\nListening for connections on port : " + PORT + " ...\n");
       // we listen until user halts server execution
       while (true) {
@@ -41,7 +40,7 @@ public class WebServer {
   }
 
 
-  private class SocketThread extends Thread {
+  private static class SocketThread extends Thread {
     // as an inner class, SocketThread sees WebServer attributes
     private final Socket insocked; // client connection via Socket class
 

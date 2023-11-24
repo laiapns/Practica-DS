@@ -15,19 +15,19 @@ import java.util.List;
  */
 
 public class UserGroup {
-  private String groupName;
+  private final String groupName;
 
-  private LocalDateTime startDate;
-  private LocalDateTime finishDate;
+  private final LocalDateTime startDate;
+  private final LocalDateTime finishDate;
 
-  private LocalTime startHour;
-  private LocalTime finishHour;
-  private ArrayList<DayOfWeek> weekPlan;
+  private final LocalTime startHour;
+  private final LocalTime finishHour;
+  private final ArrayList<DayOfWeek> weekPlan;
 
-  private List<String> allowedActions;
-  private ArrayList<Area> accessibleSpaces;
-  private List<User> users = new ArrayList<>();
-  private List<UserGroup> userGroups = new ArrayList<>();
+  private final List<String> allowedActions;
+  private final ArrayList<Area> accessibleSpaces;
+  private final List<User> users = new ArrayList<>();
+  private final List<UserGroup> userGroups = new ArrayList<>();
 
 
   /**
