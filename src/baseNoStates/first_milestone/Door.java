@@ -83,8 +83,11 @@ public class Door {
     if (state != null) {
       this.doorState = state;
       closed = isClosed;
-      LOGGER.debug("Door " + doorId + " is now in state: "
-          + this.getStateName());
+      if (this.getStateName() != "propped") {
+        LOGGER.debug("Door " + doorId + " is now in state: " + this.getStateName());
+      } else {
+        LOGGER.warn("Door " + doorId + " is now in state: " + this.getStateName());
+      }
     } else {
         LOGGER.warn("Not authorized to change the state of door "
             + doorId);
