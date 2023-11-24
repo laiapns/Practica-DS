@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
 // http://www.jcgonzalez.com/java-socket-mini-server-http-example
 public class WebServer {
   private static final Logger LOGGER =
-          org.slf4j.LoggerFactory.getLogger(Unlocked.class);
+          org.slf4j.LoggerFactory.getLogger(WebServer.class);
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter formatter =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
