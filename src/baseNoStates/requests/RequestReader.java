@@ -1,13 +1,10 @@
 package baseNoStates.requests;
 
-import baseNoStates.*;
-
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+import baseNoStates.first_milestone.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Appender para la consola -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para el archivo de texto -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%relative%thread%mdc%level%logger%msg</pattern>
+            </layout>
+        </encoder>
+        <file>acs_students_master.html</file>
+    </appender>
+
+<!--    <encoder>-->
+<!--        <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--    </encoder>-->
+
+    <!--Logger for second milestone-->
+    <logger name="baseNoStates.first_milestone" level="debug" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <!--Logger for fist milestone-->
+<!--    <logger name="baseNoStates.second_milestone" level="debug" additivity="false">-->
+<!--        <appender-ref ref="STDOUT" />-->
+<!--        <appender-ref ref="FILE" />-->
+<!--    </logger>-->
+
+    <!--Logger for all the project-->
+<!--    <root level="debug">-->
+<!--        <appender-ref ref="STDOUT" />-->
+<!--        <appender-ref ref="FILE" />-->
+<!--    </root>-->
+
+</configuration>
