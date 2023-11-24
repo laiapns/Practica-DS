@@ -16,12 +16,8 @@ import java.util.ArrayList;
 public class Space extends Area {
   private Partition parentPartition;
   private final ArrayList<Door> doorsGivingAccess = new ArrayList<>();
-  public Space(final String id, final String description, final Partition partition) {
+  public Space(String id, final String description, final Partition partition) {
     super(id, description, partition);
-  }
-
-  public String getId() {
-    return getId();
   }
 
   @Override

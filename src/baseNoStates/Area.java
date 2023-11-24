@@ -18,7 +18,7 @@ public abstract class Area {
   private String areaDescription;
   private static ArrayList<Area> allAreas = new ArrayList<>();
 
-  public Area(final String id, final String description,
+  public Area(String id, final String description,
                final Partition parentPartition) {
     this.areaId = id;
     this.areaDescription = description;

@@ -14,13 +14,9 @@ import java.util.ArrayList;
 public class Partition extends Area {
   private ArrayList<Area> childPartitions = new ArrayList<>();
   //private ArrayList<Door> doorsArea = new ArrayList<>();
-  public Partition(final String id, final String description,
+  public Partition(String id, final String description,
                    final Partition parentPartition) {
     super(id, description, parentPartition);
-  }
-
-  public String getId() {
-    return getId();
   }
 
   @Override
@@ -30,8 +26,7 @@ public class Partition extends Area {
     return doorsArea;
   }
 
-  private void getDoorsRecursively(final ArrayList<Area> partitions,
-                                   final ArrayList<Door> doorsArea) {
+  private void getDoorsRecursively(ArrayList<Area> partitions, ArrayList<Door> doorsArea) {
     for (Area area : partitions) {
       if (area instanceof Space) {
         doorsArea.addAll(area.getDoorsGivingAccess());
@@ -42,7 +37,7 @@ public class Partition extends Area {
   }
 
   @Override
-  public Area findAreaById(final String areaId) {
+  public Area findAreaById(String areaId) {
     if (this.getId().equals(areaId)) {
       return this;
     }
@@ -56,7 +51,7 @@ public class Partition extends Area {
   }
 
 
-  public void addChild(final Area child) {
+  public void addChild(Area child) {
     childPartitions.add(child);
   }
 

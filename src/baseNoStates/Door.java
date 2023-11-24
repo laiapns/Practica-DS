@@ -37,7 +37,9 @@ public class Door {
     this.closed = true;
     this.spaceFrom = from;
     this.spaceTo = to;
-    this.spaceTo.setDoorsGivingAccess((Door) this);
+    if(spaceTo != null){
+      this.spaceTo.setDoorsGivingAccess(this);
+    }
   }
 
   public void processRequest(final RequestReader request) {
