@@ -17,17 +17,17 @@
         <file>acs_students_master.html</file>
     </appender>
 
-    Logger for first milestone
-    <logger name="baseNoStates.first_milestone" level="debug" additivity="false">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
-    </logger>
-
-    <!--Logger for second milestone-->
-<!--    <logger name="baseNoStates.second_milestone" level="debug" additivity="false">-->
+<!--    Logger for first milestone-->
+<!--    <logger name="baseNoStates.firstmilestone" level="debug" additivity="false">-->
 <!--        <appender-ref ref="STDOUT" />-->
 <!--        <appender-ref ref="FILE" />-->
 <!--    </logger>-->
+
+    <!--Logger for second milestone-->
+    <logger name="baseNoStates.secondmilestone" level="debug" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
 
 <!--    Logger for all the project-->
 <!--    <root level="debug">-->
